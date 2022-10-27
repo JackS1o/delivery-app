@@ -1,5 +1,5 @@
-'use strict';
-require('sequelize');
+// 'use strict';
+// require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {
@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = (models) => {
-    User.hasMany(models.Sale, { foreignKey: 'user_id', as: 'sales' });
-    User.hasMany(models.Sale, { foreignKey: 'seller_id', as: 'sales' });
+    User.hasMany(models.Sale, { foreignKey: 'id', as: 'users' });
+    // User.hasMany(models.Sale, { foreignKey: 'seller_id', as: 'sales' });
   };
+
   
   return User;
 };

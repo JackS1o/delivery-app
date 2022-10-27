@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   SalesProduct.associate = (models) => {
     SalesProduct.belongsTo(models.Sale, {
+      throught: 'SalesProduct',
       foreignKey: 'sale_id',
       as: 'sales',
     });

@@ -1,7 +1,14 @@
 const express = require('express');
+const loginController = require('../controller/user');
+const middleLogin = require('../middleware/login');
 
 const app = express();
+app.use(express.json());
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.post('/login',
+middleLogin.existentUser,
+middleLogin.regexEmail,
+middleLogin.isPasswordValid,
+loginController.getAll);
 
 module.exports = app;
