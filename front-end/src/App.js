@@ -1,15 +1,18 @@
 import React from 'react';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import NotFound from './pages/NotFound';
+import Register from './pages/Register';
 
 function App() {
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/register" element={ <Register /> } />
+        <Route path="/404" element={ <NotFound /> } />
+        <Route path="*" element={ <Navigate to="/404" replace /> } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
