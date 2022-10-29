@@ -1,15 +1,17 @@
-// const jwt = require('jsonwebtoken');
 const { User } = require('../database/models');
-
-// const { JWT_SECRET } = process.env;
+var md5 = require('md5');
 
 const existentUser = async (req, res, next) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
+  const bodyPassword = md5(password)
+
   const user = await User.findOne({ where: { email } });
-  if (!user) {
+  const dataPassword = user.password;
+  
+  if (!user || dataPassword !== bodyPassword) {
     res.status(404).json({ message: 'usuário nao encontrado' });
   } else {
-    next(user);
+    next();
   }
 };
 const isPasswordValid = (req, res, next) => {

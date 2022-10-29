@@ -1,15 +1,21 @@
 import React from 'react';
+// import { useParams } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import ContextProvider from './context/ContextProvider';
+// import rockGlass from './images/rockGlass.svg';
+import Login from './pages/login';
 
 function App() {
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-    </div>
+    // <Login />
+    <ContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={ <Login /> } />
+        </Routes>
+      </BrowserRouter>
+    </ContextProvider>
   );
 }
 

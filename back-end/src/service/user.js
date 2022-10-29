@@ -1,3 +1,5 @@
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const { User } = require('../database/models');
 
 const getAll = async () => {
@@ -7,4 +9,5 @@ const getAll = async () => {
   const result = user.map((item) => item.dataValues);
   return result;
 };
+
 module.exports = { getAll };
