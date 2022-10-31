@@ -2,7 +2,7 @@
 require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define(
-    "Product",
+    "product",
     {
       id: {
         autoIncrement: true,
@@ -29,9 +29,9 @@ module.exports = (sequelize, DataTypes) => {
   );
   Product.associate = (models) => {
     Product.belongsToMany(models.Sale, {
-      through: "SalesProducts",
+      through: "salesProducts",
       foreignKey: "product_id",
-      as: "sales",
+      as: "products",
     });
   };
   return Product;
