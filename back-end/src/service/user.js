@@ -5,6 +5,6 @@ const getUser = async () => {
   console.log(userData);
   const result = userData.map((item) => item.dataValues);
   return result;
-
 };
+
 module.exports = { getUser };

@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import { Routes, Route } from 'react-router-dom';
-import Checkout from './pages/Checkout';
-
-function App() {
-  return (
-    <Routes>
-      <Route exact path="/checkout" element={ <Checkout /> } />
-    </Routes>
-=======
 import React from 'react';
 // import { useParams } from 'react-router-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -26,7 +16,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </ContextProvider>
->>>>>>> b1237115b1b4f4721ff4ed1eee65e3b35a6a612c
   );
 }
 
