@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         foreingKey: true,
         references: {
-          model: 'Users',
+          model: 'users',
           key: 'id',
         },
       },
@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         foreingKey: true,
         references: {
-          model: 'Users',
+          model: 'users',
           key: 'id',
         },
       },

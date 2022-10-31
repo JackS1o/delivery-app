@@ -1,15 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import ContextProvider from './context/ContextProvider';
+import Login from './pages/login';
 import Customer from './pages/products';
 
 function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route path="/customer/products" element={ <Customer /> } />
-      </Switch>
-    </div>
+    <ContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={ <Login /> } />
+          <Route path="/customer/products" element={ <Customer /> } />
+        </Routes>
+      </BrowserRouter>
+    </ContextProvider>
   );
 }
 
