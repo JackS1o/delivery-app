@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import requestApi from '../../api/index';
+import { loginIsDisabled } from '../../helpers/validations';
 
+// - 5: common_login__element-invalid-email [Elemento oculto (Mensagens de erro)];
+// data-testid pra mensagem de erro;
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [invalidUser, setInvalidUser] = useState(false);
   const handleEmail = ({ target }) => {
     setEmail(target.value);
   };
   const handlePassword = ({ target }) => {
     setPassword(target.value);
   };
-  const handleCkick = async () => {
+
+  const handleClick = async (mail, passw) => {
     const callApi = await requestApi(email, password);
-    console.log(callApi);
+    const user = callApi.data;
+    if (user.email && user.password === mail && passw) {
+      setInvalidUser(true);
+    }
   };
+
   return (
     <div>
       <form>
@@ -36,7 +45,8 @@ function Login() {
         <button
           type="button"
           data-testid="common_login__button-login"
-          onClick={ handleCkick }
+          disabled={ loginIsDisabled({ email, password }) }
+          onClick={ handleClick }
         >
           clicar
         </button>
@@ -47,6 +57,7 @@ function Login() {
           cadastrar
         </button>
       </form>
+      { invalidUser && console.log('irá para a pag do consumidor')}
     </div>
   );
 }
