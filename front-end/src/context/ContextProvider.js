@@ -7,7 +7,7 @@ function ContextProvider({ children }) {
 
   const contextValue = { userEmail, setUserEmail };
 
-  const memo = useMemo(() => (contextValue), [contextValue]);
+  const memo = useMemo(() => (userEmail), [contextValue]);
   return (
     <Context.Provider value={ memo }>
       { children }

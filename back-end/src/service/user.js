@@ -1,6 +1,3 @@
-require('dotenv').config();
-let md5 = require('md5');
-const jwt = require('jsonwebtoken');
 const { User } = require('../database/models');
 
 const getUser = async () => {
