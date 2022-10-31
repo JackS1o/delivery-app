@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
-  const history = useHistory();
-  const path = history.location.pathname;
+  const history = useNavigate();
   const logout = () => {
     localStorage.clear();
-    path('/login');
+    history('/login');
   };
 
   return (

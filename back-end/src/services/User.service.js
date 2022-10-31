@@ -1,7 +1,6 @@
 require('dotenv').config();
 const md5 = require('md5');
 const { User } = require('../database/models');
-const { User } = require('../database/models');
 
 const createUser = async (newUser, role) => {
   const user = await User.create({

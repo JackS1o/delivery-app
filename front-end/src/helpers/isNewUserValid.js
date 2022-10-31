@@ -2,7 +2,6 @@ const MIN_PASSWORD_LENGTH = 6;
 const MIN_NAME_LENGTH = 12;
 
 export default ({ name, email, password }) => {
-  // eslint-disable-next-line max-len
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   const isNameValid = name.length >= MIN_NAME_LENGTH;
   console.log('nome maior ou igual a 12?', isNameValid);

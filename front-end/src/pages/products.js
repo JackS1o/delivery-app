@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Cards from '../components/Card';
 import Header from '../components/Header';
 import CustomerContext from '../context/customerContext';
 
 function Customer() {
-  const history = useHistory();
+  const history = useNavigate();
   const { totalPrice, cartProducts } = useContext(CustomerContext);
 
   const [products, setProducts] = useState([{
@@ -23,7 +23,7 @@ function Customer() {
     if (token()) {
       getAllProducts();
     } else {
-      history.push('/login');
+      history('/login');
     }
   });
 
@@ -39,7 +39,7 @@ function Customer() {
         type="button"
         data-testid="carrinho"
         disabled={ cartProducts.length === 0 }
-        onClick={ () => history.push('/cliente/checkout') }
+        onClick={ () => history('/cliente/checkout') }
       >
         <p>
           { `Ver carrinho: R$${totalPrice.toString()}` }

@@ -1,9 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const loginController = require('../controller/user');
+const loginController = require('../controllers/User.controller');
+const productsController = require('../controllers/Products.controller');
 const middleLogin = require('../middleware/login');
 
-const cors = require('cors');
+const { getAllProducts } = require('../services/Products.service');
 
 const app = express();
 
@@ -17,5 +18,6 @@ middleLogin.isPasswordValid,
 loginController.getAll);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
+app.get('/products',  productsController.getAllProducts);
 
 module.exports = app;
