@@ -11,17 +11,18 @@ function Register() {
   const [showError, setShowError] = useState(false);
   const [unableToRegister, setUnableToRegister] = useState(true);
 
-  const validate = () => {
-    setUnableToRegister(!isNewUserValid(newUser));
-  };
-
   const handleChange = ({ target: { name, value } }) => {
     setShowError(false);
-    setNewUser((prevNewUser) => ({
-      ...prevNewUser,
-      [name]: value,
-    }));
-    validate();
+    setNewUser((prevNewUser) => {
+      setUnableToRegister(!isNewUserValid({
+        ...prevNewUser,
+        [name]: value,
+      }));
+      return {
+        ...prevNewUser,
+        [name]: value,
+      };
+    });
   };
 
   const sendToServer = async (event) => {
