@@ -1,10 +1,9 @@
-const { User } = require('../database/models');
+const { user } = require('../database/models');
 
 const getUser = async () => {
-  const userData = await User.findAll();
-  console.log(userData);
+  // console.log(typeof user);
+  const userData = await user.findAll();
   const result = userData.map((item) => item.dataValues);
   return result;
-
 };
 module.exports = { getUser };
