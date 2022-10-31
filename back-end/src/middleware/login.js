@@ -4,14 +4,12 @@ let md5 = require('md5');
 const existentUser = async (req, res, next) => {
   const { email, password } = req.body;
   const bodyPassword = md5(password)
+  try {
       const user = await User.findOne({ where: { email, password: bodyPassword} });
- 
-    if (!user) {
-      res.status(404).json({ message: 'usuário nao encontrado, email ou senha incorretos' });
-    }
-    else {
+  } catch {
+    res.status(404).json({ message: 'usuário nao encontrado, email ou senha incorretos' });
+  }
       next();
-    }
 };
 const isPasswordValid = (req, res, next) => {
   const { password } = req.body;

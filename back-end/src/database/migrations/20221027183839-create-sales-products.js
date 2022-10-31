@@ -7,7 +7,7 @@ module.exports = {
         foreingKey: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Sales',
+          model: 'sales',
           key: 'id',
         },
         primareKey: true,
@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
         foreingKey: true,
         references: {
-          model: 'Products',
+          model: 'product',
           key: 'id',
         },
         primareKey: true,

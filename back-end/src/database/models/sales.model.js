@@ -1,7 +1,7 @@
 'use strict';
 require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const Sale = sequelize.define('Sale', {
+  const Sale = sequelize.define('sale', {
     id: {
       autoIncrement: true,
       primaryKey: true,
@@ -42,9 +42,10 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
   Sale.associate = (models) => {
-    Sale.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' }, { foreignKey: 'seller_id', as: 'seller' });
-    // Sale.belongsTo(models.User, { foreignKey: 'seller_id', as: 'seller' });
-    // Sale.hasMany(models.SalesProducts, { foreignKey: 'sale_id', as: 'salesProducts' });
+    Sale.belongsTo(models.user,
+    { foreignKey: 'user_id', as: 'user' },
+    { foreignKey: 'seller_id', as: 'seller' }
+    );
   };
   return Sale;
 };
