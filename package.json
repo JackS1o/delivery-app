@@ -55,6 +55,13 @@
     }
   },
   "dependencies": {
+<<<<<<< HEAD
     "react-router-dom": "^6.4.2"
+=======
+    "dom": "^0.0.3",
+    "react": "^18.2.0",
+    "react-router-dom": "^6.4.2",
+    "router": "^1.3.7"
+>>>>>>> b1237115b1b4f4721ff4ed1eee65e3b35a6a612c
   }
 }

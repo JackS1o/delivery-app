@@ -2,7 +2,7 @@
 require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define(
-    "product",
+    "products",
     {
       id: {
         autoIncrement: true,
@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "product_id",
       as: "products",
     });
+
   };
   return Product;
 };
