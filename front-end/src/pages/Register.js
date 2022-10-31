@@ -1,50 +1,73 @@
 import { useState } from 'react';
+import axios from 'axios';
+import RegisterError from '../components/RegisterError';
+import { INITIAL_NEW_USER } from '../helpers/initialStates';
+import endpoints from '../helpers/backendEndpoints';
 
 function Register() {
-  const [errorSpan, setErrorSpan] = useState('none');
+  const [newUser, setNewUser] = useState(INITIAL_NEW_USER);
+  const [serverResponse, setServerResponse] = useState({});
+  const [showError, setShowError] = useState(false);
 
-  const showHideError = () => {
-    setErrorSpan(
-      errorSpan === 'none' ? 'flex' : 'none',
-    );
+  const handleChange = ({ target: { name, value } }) => {
+    setShowError(false);
+    setNewUser((prevNewUser) => ({
+      ...prevNewUser,
+      [name]: value,
+    }));
+  };
+
+  const sendToServer = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios({
+        method: 'POST',
+        url: endpoints.register,
+        data: { ...newUser },
+      });
+      setServerResponse(data);
+    } catch ({ response: { data: { message } } }) {
+      setServerResponse({ message });
+      setShowError(true);
+    }
   };
 
   return (
-    <form>
+    <form onSubmit={ sendToServer }>
       <h1>Cadastro</h1>
       <input
         type="text"
+        name="name"
+        value={ newUser.name }
         placeholder="Seu nome"
         data-testid="common_register__input-name"
+        onChange={ handleChange }
       />
       <input
         type="email"
+        name="email"
+        value={ newUser.email }
         placeholder="seu-email@site.com.br"
         data-testid="common_register__input-email"
+        onChange={ handleChange }
       />
       <input
         type="password"
+        name="password"
+        value={ newUser.password }
         placeholder="**********"
         data-testid="common_register__input-password"
+        onChange={ handleChange }
       />
       <button
-        type="button"
+        type="submit"
         data-testid="common_register__button-register"
       >
         CADASTRAR
       </button>
-      <button
-        type="button"
-        onClick={ showHideError }
-      >
-        TESTAR SPAN DE ERRO
-      </button>
-      <span
-        style={ { display: errorSpan } }
-        data-testid="common_register__element-invalid_register"
-      >
-        <p>ALGO DEU ERRADO NO SEU CADASTRO</p>
-      </span>
+      {
+        showError && <RegisterError message={ serverResponse.message } />
+      }
     </form>
   );
 }
