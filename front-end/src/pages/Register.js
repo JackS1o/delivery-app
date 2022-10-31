@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 import RegisterError from '../components/RegisterError';
 import { INITIAL_NEW_USER } from '../helpers/initialStates';
 import endpoints from '../helpers/backendEndpoints';
 import isNewUserValid from '../helpers/isNewUserValid';
+import responseStatus from '../helpers/responseStatus';
 
 function Register() {
   const [newUser, setNewUser] = useState(INITIAL_NEW_USER);
   const [serverResponse, setServerResponse] = useState({});
   const [showError, setShowError] = useState(false);
   const [unableToRegister, setUnableToRegister] = useState(true);
+  const [goToProducts, setGoToProducts] = useState(false);
 
   const handleChange = ({ target: { name, value } }) => {
     setShowError(false);
@@ -28,17 +31,24 @@ function Register() {
   const sendToServer = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios({
+      const res = await axios({
         method: 'POST',
         url: endpoints.register,
         data: { ...newUser },
       });
-      setServerResponse(data);
+      setServerResponse(res.data);
+      if (res.status === responseStatus.created) {
+        setGoToProducts(true);
+      }
     } catch ({ response: { data: { message } } }) {
       setServerResponse({ message });
       setShowError(true);
     }
   };
+
+  if (goToProducts) {
+    return <Navigate to="/customer/products" replace />;
+  }
 
   return (
     <form onSubmit={ sendToServer }>

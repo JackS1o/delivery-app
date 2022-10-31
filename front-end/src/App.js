@@ -4,11 +4,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import CustomerProducts from './pages/CustomerProducts';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/customer/products" element={ <CustomerProducts /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/register" element={ <Register /> } />
         <Route path="/404" element={ <NotFound /> } />
