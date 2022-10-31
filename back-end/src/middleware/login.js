@@ -11,7 +11,6 @@ const existentUser = async (req, res, next) => {
     }
     else {
       next();
-
     }
 };
 const isPasswordValid = (req, res, next) => {
