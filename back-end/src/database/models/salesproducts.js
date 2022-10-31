@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     timestamps: false,
+    tableName: 'salesProducts',
   });
   SalesProduct.associate = (models) => {
     SalesProduct.belongsTo(models.Sale, {

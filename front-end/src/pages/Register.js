@@ -3,11 +3,13 @@ import axios from 'axios';
 import RegisterError from '../components/RegisterError';
 import { INITIAL_NEW_USER } from '../helpers/initialStates';
 import endpoints from '../helpers/backendEndpoints';
+import isNewUserValid from '../helpers/isNewUserValid';
 
 function Register() {
   const [newUser, setNewUser] = useState(INITIAL_NEW_USER);
   const [serverResponse, setServerResponse] = useState({});
   const [showError, setShowError] = useState(false);
+  const [unableToRegister, setUnableToRegister] = useState(true);
 
   const handleChange = ({ target: { name, value } }) => {
     setShowError(false);
@@ -15,6 +17,7 @@ function Register() {
       ...prevNewUser,
       [name]: value,
     }));
+    setUnableToRegister(!isNewUserValid(newUser));
   };
 
   const sendToServer = async (event) => {
@@ -62,6 +65,7 @@ function Register() {
       <button
         type="submit"
         data-testid="common_register__button-register"
+        disabled={ unableToRegister }
       >
         CADASTRAR
       </button>
