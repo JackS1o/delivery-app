@@ -40,11 +40,21 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     timestamps: false,
+    tableName: 'sales',
   });
   Sale.associate = (models) => {
+<<<<<<< HEAD
     Sale.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' }, { foreignKey: 'seller_id', as: 'seller' });
     // Sale.belongsTo(models.User, { foreignKey: 'seller_id', as: 'seller' });
     // Sale.hasMany(models.SalesProducts, { foreignKey: 'sale_id', as: 'salesProducts' });
+=======
+    Sale.belongsTo(
+      models.User,
+      { foreignKey: 'user_id', as: 'user' },
+      { foreignKey: 'seller_id', as: 'seller' },
+    );
+    Sale.hasMany(models.SalesProduct, { foreignKey: 'sale_id', as: 'salesProducts' });
+>>>>>>> d5da5370c61495c612c572227fd4c38ff5069f20
   };
   return Sale;
 };

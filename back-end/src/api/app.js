@@ -3,8 +3,9 @@ const cors = require('cors');
 const loginController = require('../controller/user');
 const middleLogin = require('../middleware/login');
 
-const app = express();
+const cors = require('cors');
 
+const app = express();
 
 app.use(express.json());
 
@@ -14,5 +15,7 @@ middleLogin.existentUser,
 middleLogin.regexEmail,
 middleLogin.isPasswordValid,
 loginController.getAll);
+
+app.get('/coffee', (_req, res) => res.status(418).end());
 
 module.exports = app;
