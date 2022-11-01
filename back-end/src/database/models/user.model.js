@@ -1,7 +1,7 @@
-'use strict';
-require('sequelize');
+// 'use strict';
+// require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const User = sequelize.define('user', {
     id: {
       autoIncrement: true,
       primaryKey: true,
@@ -16,11 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = (models) => {
-    User.hasMany(models.Sale,
+    User.hasMany(models.sale,
       { foreignKey: 'user_id', as: 'buyer' },
       { foreignKey: 'seller_id', as: 'seller' });
   };
-  
+
   return User;
 };
-

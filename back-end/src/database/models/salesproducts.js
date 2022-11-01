@@ -1,7 +1,7 @@
 'use strict';
 require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const SalesProduct = sequelize.define('SalesProduct', {
+  const SalesProduct = sequelize.define('salesProduct', {
     sale_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       through: 'salesProducts',
       foreignKey: 'sale_id',
       as: 'sales',
-      foreignKey: 'sale_id',
       otherKey: 'product_id',
     });
     models.sale.belongsToMany(models.products, {

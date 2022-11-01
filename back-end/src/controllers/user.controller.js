@@ -1,9 +1,9 @@
-const UserService = require('../services/User.service');
+const userService = require('../services/user.service');
 const { internalServerError } = require('../errors/messages');
 
 const createUser = async (req, res) => {
   try {
-    const user = await UserService.createUser(req.body, 'customer');
+    const user = await userService.createUser(req.body, 'customer');
     return res.status(201).json(user);
   } catch (error) {
     console.log(error);
@@ -12,6 +12,13 @@ const createUser = async (req, res) => {
   }
 };
 
+const getAll = async (req, res) => {
+  const { email } = req.body;
+  const getUser = await userService.getUser(email);
+  return res.status(200).json(getUser);
+ };
+
 module.exports = {
   createUser,
+  getAll,
 };
