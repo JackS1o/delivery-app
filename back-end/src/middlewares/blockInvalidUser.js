@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { User } = require('../database/models');
+const { user } = require('../database/models');
 
 const EMAIL_ALREADY_EXISTS = 'Email already registered';
 const NAME_ALREADY_EXISTS = 'Name already registered';
@@ -24,11 +24,11 @@ const checkReqBody = (req, res, next) => {
 const checkIfUserExists = async (req, res, next) => {
   try {
     const { email, name } = req.body;
-    const sameEmail = await User.findOne({ where: { email } });
+    const sameEmail = await user.findOne({ where: { email } });
 
     if (sameEmail) throw new Error(EMAIL_ALREADY_EXISTS);
 
-    const sameName = await User.findOne({ where: { name } });
+    const sameName = await user.findOne({ where: { name } });
 
     if (sameName) throw new Error(NAME_ALREADY_EXISTS);
 
