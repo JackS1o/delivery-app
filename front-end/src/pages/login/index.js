@@ -52,7 +52,11 @@ function Login() {
         >
           clicar
         </button>
-        <button type="button" data-testid="common_login__button-register">
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+          onClick={ () => navigate('/register') }
+        >
           cadastrar
         </button>
       </form>
