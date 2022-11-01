@@ -8,26 +8,32 @@ function Header() {
     history('/login');
   };
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
   return (
     <div className="header">
       <Link
-        to="/cliente/produtos"
+        to="/customer/products"
+        data-testid="customer_products__element-navbar-link-products"
       >
         Produtos
       </Link>
       <Link
         to="/pedidos"
+        data-testid="customer_products__element-navbar-link-orders"
       >
         Meus pedidos
       </Link>
       <Link
-        to="/usuario"
+        to="/user/profile"
+        data-testid="customer_products__element-navbar-user-full-name"
       >
         {user}
       </Link>
       <button
         type="button"
         onClick={ logout }
+        data-testid="customer_products__element-navbar-link-logout"
       >
         Sair
       </button>
