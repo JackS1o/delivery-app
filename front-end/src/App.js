@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import NotFound from './pages/NotFound';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import CustomerProducts from './pages/CustomerProducts';
+import NotFound from './pages/notFound';
+import Register from './pages/register';
+import Login from './pages/login';
+import CustomerProducts from './pages/customerProducts';
 
 function App() {
   return (

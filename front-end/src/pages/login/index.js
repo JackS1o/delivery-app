@@ -1,19 +1,14 @@
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [goToRegister, setGoToRegister] = useState(false);
-
-  if (goToRegister) {
-    return <Navigate to="/register" replace />;
-  }
+  const navigate = useNavigate();
 
   return (
     <main>
       <p>ESTA É A PÁGINA DE LOGIN</p>
       <button
         type="button"
-        onClick={ () => setGoToRegister(true) }
+        onClick={ () => navigate('/register') }
         data-testid="common_login__button-register"
       >
         Ainda não tenho conta
