@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     role: DataTypes.STRING,
   }, {
-    timestamps: false, tableName: 'users'
+    timestamps: false,
   });
 
   User.associate = (models) => {
@@ -21,7 +21,5 @@ module.exports = (sequelize, DataTypes) => {
       { foreignKey: 'seller_id', as: 'seller' });
   };
 
-  
   return User;
 };
-

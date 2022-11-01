@@ -1,8 +1,6 @@
 import React from 'react';
 // import { useParams } from 'react-router-dom';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import './App.css';
-
 // import rockGlass from './images/rockGlass.svg';
 import Login from './pages/login';
 import Customer from './pages/customer';

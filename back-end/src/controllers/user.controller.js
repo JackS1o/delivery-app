@@ -1,4 +1,4 @@
-const userService = require('../service/user');
+const userService = require('../services/user.service');
 
 const getAll = async (req, res) => {
   const { email } = req.body;
