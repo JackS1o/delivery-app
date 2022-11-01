@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const loginController = require('../controller/user');
+const loginController = require('../controllers/user.controller');
 const middleLogin = require('../middleware/login');
 
 const app = express();
