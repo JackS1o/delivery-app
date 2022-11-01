@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import ContextProvider from './context/ContextProvider';
+import ContextProvider from './context/customerProvider';
 import Login from './pages/login';
 import CustomerProducts from './pages/CustomerProducts';
 import NotFound from './pages/NotFound';
