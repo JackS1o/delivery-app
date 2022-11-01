@@ -8,6 +8,8 @@ function Cards({ product }) {
 
   const [quantity, setQuantity] = useState(0);
 
+  const updatePrice = (price) => price.toString().replace('.', ',');
+
   function handleCart(totalCart) {
     const cartProduct = cartProducts.find(({ name }) => name === product.name);
     if (!cartProduct) {
@@ -24,8 +26,8 @@ function Cards({ product }) {
   }
 
   function removeCartProduct() {
-    const updatedProducts = cartProducts.filter(({ name }) => name !== product.name);
-    setCartProducts(updatedProducts);
+    const removeProducts = cartProducts.filter(({ name }) => name !== product.name);
+    setCartProducts(removeProducts);
   }
 
   const addQuantity = () => {
@@ -56,35 +58,36 @@ function Cards({ product }) {
   return (
     <div>
       <p
-        data-testid={ `${product.name}` }
+        data-testid={ `customer_products__element-card-title-${product.id}` }
       >
         {product.name}
       </p>
       <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-        {product.price}
+        {updatePrice(product.price)}
       </p>
       <div className="img-cards">
         <img
+          data-testid={ `customer_products__img-card-bg-image-${product.id}` }
           src={ product.url_image }
           alt={ product.name }
         />
       </div>
       <button
-        data-testid="add"
+        data-testid={ `customer_products__button-card-add-${product.id}` }
         type="button"
         onClick={ addQuantity }
       >
         +
       </button>
       <input
-        data-testid="total"
+        data-testid={ `customer_products__element-card-quantity-${product.id}` }
         type="number"
         min={ 0 }
         onChange={ handleChange }
         value={ quantity }
       />
       <button
-        data-testid="remove"
+        data-testid={ `customer_products__button-card-remove-${product.id}` }
         type="button"
         onClick={ removeQuantity }
       >

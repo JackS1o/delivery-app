@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import CustomerContext from '../context/customerContext';
 import getProducts from '../api/request';
 
-function Customer() {
+function CustomerProducts() {
   const history = useNavigate();
   const { totalPrice, cartProducts } = useContext(CustomerContext);
 
@@ -50,4 +50,4 @@ function Customer() {
   );
 }
 
-export default Customer;
+export default CustomerProducts;
