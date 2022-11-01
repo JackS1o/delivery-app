@@ -9,9 +9,9 @@ app.use(express.json());
 
 app.use(cors());
 app.post('/login',
-// middleLogin.existentUser,
 // middleLogin.regexEmail,
-// middleLogin.isPasswordValid,
+// middleLogin.regexEmail,
+middleLogin.existentUser,
 loginController.getAll);
 
 module.exports = app;

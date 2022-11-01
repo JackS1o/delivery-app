@@ -1,10 +1,8 @@
-const { User } = require('../database/models');
+const { user } = require('../database/models');
 
-const getUser = async () => {
-  const userData = await User.findAll();
-  console.log(userData);
-  const result = userData.map((item) => item.dataValues);
-  return result;
+const getUser = async (email) => {
+  const userData = await user.findOne( {where: {email} });
+  return userData;
 };
 
 module.exports = { getUser };
