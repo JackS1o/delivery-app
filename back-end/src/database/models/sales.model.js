@@ -2,7 +2,7 @@
 require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
-    "sale",
+    "sales",
     {
       id: {
         autoIncrement: true,
