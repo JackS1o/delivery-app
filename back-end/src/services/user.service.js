@@ -1,10 +1,8 @@
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
+const jwtKey = require('fs')
+  .readFileSync('jwt.evaluation.key', { encoding: 'utf-8' });
 const { user } = require('../database/models');
-
-const jwtKey = require("fs")
-  .readFileSync("jwt.evaluation.key", { encoding: "utf-8" });
-
 
 function createToken(User) {
   const jwtConfig = {
