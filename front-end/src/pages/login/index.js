@@ -4,8 +4,6 @@ import requestApi from '../../api/index';
 import { saveUserOnLS } from '../../helpers/localStorage';
 import { loginIsDisabled } from '../../helpers/validations';
 
-// - 5: common_login__element-invalid-email [Elemento oculto (Mensagens de erro)];
-// data-testid pra mensagem de erro;
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
