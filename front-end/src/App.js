@@ -7,6 +7,7 @@ import CustomerProducts from './pages/customerProducts';
 import Customer from './pages/customer';
 import ContextProvider from './context/customerProvider';
 import Checkout from './pages/checkout';
+import CustumerOrder from './pages/customerOrders';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             element={ <Navigate to="/login" /> }
           />
           <Route exact path="/customer" element={ <Customer /> } />
+          <Route exact path="/customer/orders" element={ <CustumerOrder /> } />
         </Routes>
       </BrowserRouter>
     </ContextProvider>
