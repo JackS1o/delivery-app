@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import requestApi from '../../api/index';
+import { saveUserOnLS } from '../../helpers/localStorage';
 import { loginIsDisabled } from '../../helpers/validations';
 
 // - 5: common_login__element-invalid-email [Elemento oculto (Mensagens de erro)];
@@ -22,6 +23,7 @@ function Login() {
     if (callApi.message === 'Usuário não existe') {
       return setInvalidUser(true);
     }
+    saveUserOnLS(callApi);
     navigate('/customer/products');
   };
 

@@ -1,20 +1,33 @@
 const md5 = require('md5');
+const jwt = require('jsonwebtoken');
+const jwtKey = require('fs')
+  .readFileSync('jwt.evaluation.key', { encoding: 'utf-8' });
 const { user } = require('../database/models');
 
-const createUser = async (newUser, role) => {
+function createToken(User) {
+  const jwtConfig = {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  };
+  const token = jwt.sign({ data: User.email }, jwtKey, jwtConfig);
+  return token;
+}
+
+const createUser = async (newUser, newUserRole) => {
   const User = await user.create({
     ...newUser,
     password: md5(newUser.password),
-    role,
+    role: newUserRole,
   });
-  return User;
+  const { name, email, role } = User.dataValues;
+  return { name, email, role, token: createToken(User) };
 };
 
-const getUser = async (email) => {
-  const userData = await user.findOne({ where: { email } });
-  return userData;
+const getUser = async (mail) => {
+  const userData = await user.findOne({ where: { email: mail } });
+  const { name, email, role } = userData.dataValues;
+  return { name, email, role, token: createToken(userData) };
 };
-
 module.exports = {
   createUser,
   getUser,
