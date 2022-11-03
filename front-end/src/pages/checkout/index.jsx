@@ -1,9 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CustomerContext from '../../context/customerContext';
+import sellerRequest from '../../api/sellerRequest';
 
 function Checkout() {
   const { cartProducts } = useContext(CustomerContext);
   const [newCart, setNewCart] = useState(cartProducts);
+  const [sellerData, setSellerData] = useState();
+  const navigate = useNavigate();
 
   const removeCartProduct = (product) => {
     const newCartProducts = newCart.filter((item) => item.id !== product.id);
@@ -15,6 +19,14 @@ function Checkout() {
     (acc, product) => acc + (product.price * product.quantity),
     0,
   );
+
+  useEffect(() => {
+    sellerRequest().then((response) => setSellerData(response));
+  }, []);
+
+  const finishOrder = async () => {
+    navigate(`/customer/orders/${id}`);
+  };
 
   return (
     <div>
@@ -98,7 +110,13 @@ function Checkout() {
         <div>
           <span>P.Vendedora Responsável</span>
           <select data-testid="customer_checkout__select-seller">
-            <option value="option1">Vendedora 1</option>
+            {sellerData?.map((seller) => (
+              <option
+                key={ seller.id }
+              >
+                {seller.name}
+              </option>
+            ))}
           </select>
         </div>
         <div>
@@ -115,6 +133,7 @@ function Checkout() {
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
+          onClick={ finishOrder }
         >
           Finalizar Pedido
         </button>
