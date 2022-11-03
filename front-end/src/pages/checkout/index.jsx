@@ -1,12 +1,17 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomerContext from '../../context/customerContext';
-import sellerRequest from '../../api/sellerRequest';
+import { sellerRequest, findSeller, saleCreate } from '../../api/sellerRequest';
 
 function Checkout() {
   const { cartProducts } = useContext(CustomerContext);
   const [newCart, setNewCart] = useState(cartProducts);
   const [sellerData, setSellerData] = useState();
+  const [address, setAddress] = useState({
+    seller: 'Fulana Pereira',
+    address: '',
+    number: '',
+  });
   const navigate = useNavigate();
 
   const removeCartProduct = (product) => {
@@ -16,7 +21,7 @@ function Checkout() {
   };
 
   const totalPrice = newCart.reduce(
-    (acc, product) => acc + (product.price * product.quantity),
+    (acc, product) => acc + Number(product.price * product.quantity),
     0,
   );
 
@@ -24,8 +29,24 @@ function Checkout() {
     sellerRequest().then((response) => setSellerData(response));
   }, []);
 
+  const handleCheckout = ({ target }) => {
+    const { name, value } = target;
+    setAddress({ ...address, [name]: value });
+  };
+
   const finishOrder = async () => {
-    navigate(`/customer/orders/${id}`);
+    const seller = await findSeller(address.seller);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const order = {
+      user_id: user.id,
+      seller_id: seller.id,
+      total_price: totalPrice,
+      delivery_address: address.address,
+      delivery_number: address.number,
+      status: 'pendente',
+    };
+    const createSale = await saleCreate(order);
+    navigate(`/customer/orders/${createSale.id}`);
   };
 
   return (
@@ -109,7 +130,12 @@ function Checkout() {
         <h3>Detalhes e Endereço para Entrega</h3>
         <div>
           <span>P.Vendedora Responsável</span>
-          <select data-testid="customer_checkout__select-seller">
+          <select
+            data-testid="customer_checkout__select-seller"
+            name="seller"
+            value={ address.seller }
+            onChange={ handleCheckout }
+          >
             {sellerData?.map((seller) => (
               <option
                 key={ seller.id }
@@ -121,13 +147,22 @@ function Checkout() {
         </div>
         <div>
           <span>Endereço</span>
-          <input type="text" data-testid="customer_checkout__input-address" />
+          <input
+            type="text"
+            data-testid="customer_checkout__input-address"
+            name="address"
+            value={ address.address }
+            onChange={ handleCheckout }
+          />
         </div>
         <div>
           <span>Número</span>
           <input
             type="number"
             data-testid="customer_checkout__input-address-number"
+            name="number"
+            value={ address.number }
+            onChange={ handleCheckout }
           />
         </div>
         <button
