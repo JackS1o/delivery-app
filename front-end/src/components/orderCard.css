@@ -1,5 +1,5 @@
 .card-order-container {
+  border: 1px solid black;
   display: flex;
   gap: 15rem;
-  border: 1px solid black;
 }
