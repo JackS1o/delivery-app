@@ -11,6 +11,11 @@ function Checkout() {
     setNewCart(newArray);
   };
 
+  const totalPrice = newCart.reduce(
+    (acc, product) => acc + (product.price * product.quantity),
+    0,
+  );
+
   return (
     <div>
       <header>
@@ -47,7 +52,7 @@ function Checkout() {
                 `customer_checkout__element-order-table-item-number-${index}`
               }
             >
-              {product.id}
+              {(index + 1)}
             </td>
             <td
               data-testid={ `customer_checkout__element-order-table-name-${index}` }
@@ -62,12 +67,12 @@ function Checkout() {
             <td
               data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
             >
-              {product.price}
+              {product.price.replace('.', ',')}
             </td>
             <td
               data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
             >
-              {product.price * product.quantity}
+              {(product.price * product.quantity).toFixed(2).replace('.', ',')}
             </td>
             <td>
               <button
@@ -86,10 +91,8 @@ function Checkout() {
       </table>
       <section>
         <h1 data-testid="customer_checkout__element-order-total-price">
-          {`Total: R$ ${newCart.reduce(
-            (acc, product) => acc + product.price * product.quantity,
-            0,
-          )}`}
+          Total: R$
+          <span>{totalPrice.toFixed(2).replace('.', ',')}</span>
         </h1>
         <h3>Detalhes e Endereço para Entrega</h3>
         <div>
