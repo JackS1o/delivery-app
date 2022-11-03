@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CustomerContext from '../../context/customerContext';
 
 function Checkout() {
+  const { cartProducts } = useContext(CustomerContext);
+  console.log(cartProducts);
   return (
     <div>
       <header>
-        <div data-testid="customer_products__element-navbar-link-products">Produtos</div>
-        <div
-          data-testid="customer_products__element-navbar-link-orders"
-        >
+        <div data-testid="customer_products__element-navbar-link-products">
+          Produtos
+        </div>
+        <div data-testid="customer_products__element-navbar-link-orders">
           Meus Pedidos
         </div>
-        <div
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
+        <div data-testid="customer_products__element-navbar-user-full-name">
           Nome do Usuário
         </div>
         <button
@@ -32,46 +33,52 @@ function Checkout() {
           <th>Sub-total</th>
           <th>Remover Item</th>
         </tr>
-        <tr>
-          <td
-            data-testid="customer_checkout__element-order-table-item-number-1"
-          >
-            1
-          </td>
-          <td
-            data-testid="customer_checkout__element-order-table-name-1"
-          >
-            Camisa
-          </td>
-          <td
-            data-testid="customer_checkout__element-order-table-quantity-1"
-          >
-            1
-          </td>
-          <td
-            data-testid="customer_checkout__element-order-table-unit-price-1"
-          >
-            R$ 50,00
-
-          </td>
-          <td
-            data-testid="customer_checkout__element-order-table-sub-total-1"
-          >
-            R$ 50,00
-
-          </td>
-          <td>
-            <button
-              type="button"
-              data-testid="customer_checkout__element-order-table-remove-1"
+        {cartProducts.map((product, index) => (
+          <tr key={ index }>
+            <td
+              data-testid={
+                `customer_checkout__element-order-table-item-number-${index}`
+              }
             >
-              Remover
-            </button>
-          </td>
-        </tr>
+              {product.id}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-name-${index}` }
+            >
+              {product.name}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+            >
+              {product.quantity}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-unit-price-${index}` }
+            >
+              {product.price}
+            </td>
+            <td
+              data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
+            >
+              {product.price * product.quantity}
+            </td>
+            <td>
+              <button
+                type="button"
+                data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+              >
+                Remover
+              </button>
+            </td>
+          </tr>
+        ))}
       </table>
       <section>
-        <h1 data-testid="customer_checkout__element-order-total-price">Total</h1>
+        <h1 data-testid="customer_checkout__element-order-total-price">
+          {`Total: R$ ${cartProducts.reduce((acc, product) => (
+            acc + (product.price * product.quantity)
+          ), 0)}`}
+        </h1>
         <h3>Detalhes e Endereço para Entrega</h3>
         <div>
           <span>P.Vendedora Responsável</span>
@@ -85,7 +92,10 @@ function Checkout() {
         </div>
         <div>
           <span>Número</span>
-          <input type="number" data-testid="customer_checkout__input-address-number" />
+          <input
+            type="number"
+            data-testid="customer_checkout__input-address-number"
+          />
         </div>
         <button
           type="button"
