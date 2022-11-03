@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import requestApi from '../../api/index';
 import { saveUserOnLS } from '../../helpers/localStorage';
 import { loginIsDisabled } from '../../helpers/validations';
+import './style.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -33,7 +34,7 @@ function Login() {
           type="email"
           name="email"
           value={ email }
-          placeholder="Insira seu Email"
+          placeholder="Insira seu email"
           onChange={ handleEmail }
         />
         <input
@@ -50,14 +51,14 @@ function Login() {
           disabled={ loginIsDisabled({ email, password }) }
           onClick={ handleClick }
         >
-          clicar
+          Login
         </button>
         <button
           type="button"
           data-testid="common_login__button-register"
           onClick={ () => navigate('/register') }
         >
-          cadastrar
+          Cadastrar
         </button>
       </form>
       {invalidUser && (

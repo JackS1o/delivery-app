@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserFromLS } from '../helpers/localStorage';
+import './Header.css';
 
 function Header() {
   const [user, setUser] = useState({});

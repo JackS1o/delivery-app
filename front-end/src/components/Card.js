@@ -67,6 +67,7 @@ function Cards({ product }) {
       </p>
       <div className="img-cards">
         <img
+          width="100px"
           data-testid={ `customer_products__img-card-bg-image-${product.id}` }
           src={ product.url_image }
           alt={ product.name }
