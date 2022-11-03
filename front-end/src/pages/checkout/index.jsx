@@ -1,9 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import CustomerContext from '../../context/customerContext';
 
 function Checkout() {
   const { cartProducts } = useContext(CustomerContext);
-  console.log(cartProducts);
+  const [newCart, setNewCart] = useState(cartProducts);
+
+  const removeCartProduct = (product) => {
+    const newCartProducts = newCart.filter((item) => item.id !== product.id);
+    const newArray = [...new Set(newCartProducts)];
+    setNewCart(newArray);
+  };
+
   return (
     <div>
       <header>
@@ -33,7 +40,7 @@ function Checkout() {
           <th>Sub-total</th>
           <th>Remover Item</th>
         </tr>
-        {cartProducts.map((product, index) => (
+        {newCart.map((product, index) => (
           <tr key={ index }>
             <td
               data-testid={
@@ -66,7 +73,11 @@ function Checkout() {
               <button
                 type="button"
                 data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                onClick={ () => removeCartProduct(product) }
               >
+                <span
+                  data-testid={ `customer_products__element-card-title-${product.id}` }
+                />
                 Remover
               </button>
             </td>
@@ -75,9 +86,10 @@ function Checkout() {
       </table>
       <section>
         <h1 data-testid="customer_checkout__element-order-total-price">
-          {`Total: R$ ${cartProducts.reduce((acc, product) => (
-            acc + (product.price * product.quantity)
-          ), 0)}`}
+          {`Total: R$ ${newCart.reduce(
+            (acc, product) => acc + product.price * product.quantity,
+            0,
+          )}`}
         </h1>
         <h3>Detalhes e Endereço para Entrega</h3>
         <div>
