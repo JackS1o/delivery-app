@@ -30,7 +30,7 @@ const getSales = async () => {
 
 const getSalesById = async (sellerId) => {
   const sales = await sale.findAll({
-    where: { seller_id: sellerId },
+    where: { sellerId },
   });
   return sales;
 };
