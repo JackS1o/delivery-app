@@ -7,7 +7,7 @@ function OrderDetails() {
     name: '',
     date: '',
     status: '',
-    products: [],
+    product: [],
     price: '',
   });
 
@@ -49,7 +49,7 @@ function OrderDetails() {
           <th>Valor Unitário</th>
           <th>Sub-total</th>
         </tr>
-        {order.products.map((item, index) => (
+        {order.product.map((item, index) => (
           <tr key={ item.productId }>
             <td
               data-testid={
