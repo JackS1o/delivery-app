@@ -22,7 +22,7 @@ function CustumerOrder() {
       setSaleCard(getAllSales);
     }
   }, []);
-  console.log(`${saleCard}`);
+  console.log(`nova branch ${saleCard}`);
   return (
     <div>
       <Header />
