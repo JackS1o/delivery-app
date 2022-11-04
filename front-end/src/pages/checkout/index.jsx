@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomerContext from '../../context/customerContext';
 import { sellerRequest, saleCreate } from '../../api/sellerRequest';
+import Header from '../../components/Header';
 
 function Checkout() {
   const { cartProducts } = useContext(CustomerContext);
@@ -51,23 +52,7 @@ function Checkout() {
 
   return (
     <div>
-      <header>
-        <div data-testid="customer_products__element-navbar-link-products">
-          Produtos
-        </div>
-        <div data-testid="customer_products__element-navbar-link-orders">
-          Meus Pedidos
-        </div>
-        <div data-testid="customer_products__element-navbar-user-full-name">
-          Nome do Usuário
-        </div>
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-logout"
-        >
-          Sair
-        </button>
-      </header>
+      <Header />
       <h3>Finalizar Pedido</h3>
       <table>
         <tr>
