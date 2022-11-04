@@ -42,7 +42,7 @@ function Checkout() {
       total_price: totalPrice,
       delivery_address: address.address,
       delivery_number: address.number,
-      status: 'pendente',
+      status: 'Pendente',
     };
     console.log(order);
     const createSale = await saleCreate(order);
@@ -139,7 +139,7 @@ function Checkout() {
             {sellerData?.map((seller) => (
               <option
                 key={ seller.id }
-                selected
+                defaultValue={ seller.id }
                 value={ seller.id }
               >
                 {seller.name}

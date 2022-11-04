@@ -6,7 +6,6 @@ const router = express.Router();
 
 router
   .get('/seller', sellerController.getSeller)
-  .get('/seller/:name', sellerController.findSeller)
   .post('/sales', tokenValidate.validateToken, sellerController.createSale);
 
 module.exports = router;
