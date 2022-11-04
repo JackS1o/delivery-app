@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserFromLS } from '../helpers/localStorage';
 
+const getByUserRole = {
+  customer: 'Produtos',
+  seller: 'Pedidos',
+  administrator: 'Gerenciar Usuários',
+};
+
 function Header() {
   const [user, setUser] = useState({});
   const history = useNavigate();
@@ -20,14 +26,18 @@ function Header() {
         to="/customer/products"
         data-testid="customer_products__element-navbar-link-products"
       >
-        Produtos
+        { getByUserRole[user.role] }
       </Link>
-      <Link
-        to="/pedidos"
-        data-testid="customer_products__element-navbar-link-orders"
-      >
-        Meus pedidos
-      </Link>
+      {
+        user.role === 'customer' && (
+          <Link
+            to="/pedidos"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            Meus pedidos
+          </Link>
+        )
+      }
       <Link
         to="/user/profile"
         data-testid="customer_products__element-navbar-user-full-name"
