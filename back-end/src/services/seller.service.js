@@ -5,11 +5,6 @@ const getSeller = async () => {
   return sellerData;
 };
 
-const findSeller = async (name) => {
-  const sellerData = await user.findOne({ where: { name } });
-  return sellerData;
-};
-
 const createSale = async (body) => {
   const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status } = body;
   const saleData = await sale.create({
@@ -25,6 +20,5 @@ const createSale = async (body) => {
 
 module.exports = {
   getSeller,
-  findSeller,
   createSale,
 };

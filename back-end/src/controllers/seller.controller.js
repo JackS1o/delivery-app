@@ -5,12 +5,6 @@ const getSeller = async (req, res) => {
   return res.status(200).json(seller);
 };
 
-const findSeller = async (req, res) => {
-  const { name } = req.params;
-  const seller = await service.findSeller(name);
-  return res.status(200).json(seller);
-};
-
 const createSale = async (req, res) => {
   const { body } = req;
   const sale = await service.createSale(body);
@@ -19,6 +13,5 @@ const createSale = async (req, res) => {
 
 module.exports = {
   getSeller,
-  findSeller,
   createSale,
 };

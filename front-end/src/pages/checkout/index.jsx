@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomerContext from '../../context/customerContext';
-import { sellerRequest, findSeller, saleCreate } from '../../api/sellerRequest';
+import { sellerRequest, saleCreate } from '../../api/sellerRequest';
 
 function Checkout() {
   const { cartProducts } = useContext(CustomerContext);
   const [newCart, setNewCart] = useState(cartProducts);
   const [sellerData, setSellerData] = useState();
   const [address, setAddress] = useState({
-    seller: 'Fulana Pereira',
+    seller: 2,
     address: '',
     number: '',
   });
@@ -35,16 +35,16 @@ function Checkout() {
   };
 
   const finishOrder = async () => {
-    const seller = await findSeller(address.seller);
     const user = JSON.parse(localStorage.getItem('user'));
     const order = {
       user_id: user.id,
-      seller_id: seller.id,
+      seller_id: address.seller,
       total_price: totalPrice,
       delivery_address: address.address,
       delivery_number: address.number,
       status: 'pendente',
     };
+    console.log(order);
     const createSale = await saleCreate(order);
     navigate(`/customer/orders/${createSale.id}`);
   };
@@ -139,6 +139,8 @@ function Checkout() {
             {sellerData?.map((seller) => (
               <option
                 key={ seller.id }
+                selected
+                value={ seller.id }
               >
                 {seller.name}
               </option>

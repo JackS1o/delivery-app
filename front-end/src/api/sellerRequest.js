@@ -7,13 +7,6 @@ const sellerRequest = async () => {
   return seller;
 };
 
-const findSeller = async (name) => {
-  const url = `http://localhost:3001/seller/${name}`;
-  const seller = await axios.get(url).then((response) => response.data)
-    .catch((error) => error.response.data);
-  return seller;
-};
-
 const saleCreate = async (order) => {
   const url = 'http://localhost:3001/sales';
   const user = JSON.parse(localStorage.getItem('user'));
@@ -33,4 +26,4 @@ const saleCreate = async (order) => {
   return newSale;
 };
 
-export { sellerRequest, findSeller, saleCreate };
+export { sellerRequest, saleCreate };
