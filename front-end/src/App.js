@@ -11,8 +11,6 @@ import Checkout from './pages/checkout';
 import CustumerOrder from './pages/customerOrders';
 import OrderDetails from './pages/sellerOrderDetails/orderDetails';
 
-console.log('alteração commit');
-
 function App() {
   return (
     <ContextProvider>

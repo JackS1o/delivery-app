@@ -19,14 +19,14 @@ const createUser = async (newUser, newUserRole) => {
     password: md5(newUser.password),
     role: newUserRole,
   });
-  const { name, email, role } = User.dataValues;
-  return { name, email, role, token: createToken(User) };
+  const { id, name, email, role } = User.dataValues;
+  return { id, name, email, role, token: createToken(User) };
 };
 
 const getUser = async (mail) => {
   const userData = await user.findOne({ where: { email: mail } });
-  const { name, email, role } = userData.dataValues;
-  return { name, email, role, token: createToken(userData) };
+  const { id, name, email, role } = userData.dataValues;
+  return { id, name, email, role, token: createToken(userData) };
 };
 module.exports = {
   createUser,
