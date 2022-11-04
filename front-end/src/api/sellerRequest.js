@@ -16,11 +16,18 @@ const findSeller = async (name) => {
 
 const saleCreate = async (order) => {
   const url = 'http://localhost:3001/sales';
-  const token = localStorage.getItem('user');
+  const user = JSON.parse(localStorage.getItem('user'));
   const newSale = await axios.post(
     url,
-    { ...order },
-    { headers: { authorization: token } },
+    {
+      userId: order.user_id,
+      sellerId: order.seller_id,
+      totalPrice: order.total_price,
+      deliveryAddress: order.delivery_address,
+      deliveryNumber: order.delivery_number,
+      status: order.status,
+    },
+    { headers: { authorization: user.token } },
   ).then((response) => response.data)
     .catch((error) => error.response.data);
   return newSale;
