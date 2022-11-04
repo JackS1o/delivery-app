@@ -77,7 +77,7 @@ function SellerOrderDetails() {
               </tr>
             ))}
           </thead>
-          <div>Total</div>
+          <div>Total: R$</div>
         </table>
       </div>
     </div>
