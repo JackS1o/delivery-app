@@ -43,8 +43,8 @@ function Checkout() {
       delivery_address: address.address,
       delivery_number: address.number,
       status: 'Pendente',
+      order: newCart,
     };
-    console.log(order);
     const createSale = await saleCreate(order);
     navigate(`/customer/orders/${createSale.id}`);
   };

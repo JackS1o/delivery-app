@@ -19,6 +19,7 @@ const saleCreate = async (order) => {
       deliveryAddress: order.delivery_address,
       deliveryNumber: order.delivery_number,
       status: order.status,
+      order,
     },
     { headers: { authorization: user.token } },
   ).then((response) => response.data)

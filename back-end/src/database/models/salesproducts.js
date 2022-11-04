@@ -1,16 +1,18 @@
 'use strict';
 require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  const SalesProduct = sequelize.define('salesProduct', {
-    sale_id: {
+  const SalesProduct = sequelize.define('sales_products', {
+    saleId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       foreingKey: true,
+      field: 'sale_id',
     },
-    product_id: {
+    productId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       foreingKey: true,
+      field: 'product_id',
     },
     quantity: {
       type: DataTypes.INTEGER,
@@ -18,19 +20,20 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     timestamps: false,
+    field: { underscored: true },
   });
   SalesProduct.associate = (models) => {
     SalesProduct.belongsToMany(models.sale, {
-      through: 'salesProducts',
-      foreignKey: 'sale_id',
+      through: 'sales_products',
+      foreignKey: 'saleId',
       as: 'sales',
-      otherKey: 'product_id',
+      otherKey: 'productId',
     });
     models.sale.belongsToMany(models.products, {
       through: SalesProduct,
       as: 'products',
-      foreignKey: 'product_id',
-      otherKey: 'sale_id',
+      foreignKey: 'productId',
+      otherKey: 'saleId',
     });
   }; 
   return SalesProduct;
