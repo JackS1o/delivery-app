@@ -22,7 +22,7 @@ function CustumerOrder() {
       setSaleCard(getAllSales);
     }
   }, []);
-  console.log(saleCard);
+  console.log(`${saleCard}`);
   return (
     <div>
       <Header />
