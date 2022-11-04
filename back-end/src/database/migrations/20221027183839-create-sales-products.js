@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('salesProducts', {
+    await queryInterface.createTable('sales_products', {
       sale_id: {
         allowNull: false,
         foreingKey: true,
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('salesProducts');
+    await queryInterface.dropTable('sales_products');
   }
 };

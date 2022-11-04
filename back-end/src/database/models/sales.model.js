@@ -10,31 +10,38 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      user_id: {
+      userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         foreingKey: true,
+        field: "user_id",
       },
-      seller_id: {
+      sellerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         foreingKey: true,
+        field: "seller_id",
       },
-      total_price: {
+      totalPrice: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
+        field: "total_price",
       },
-      delivery_address: {
+      deliveryAddress: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: "delivery_address",
       },
-      delivery_number: {
+      deliveryNumber: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: "delivery_number",
       },
-      sale_date: {
+      saleDate: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
+        field: "sale_date",
       },
       status: {
         type: DataTypes.STRING,
@@ -43,6 +50,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: false,
+      field: { underscored: true },
     }
   );
   Sale.associate = (models) => {
