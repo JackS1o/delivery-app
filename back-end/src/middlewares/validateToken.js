@@ -4,7 +4,7 @@ const jwtKey = require('fs')
 
 const validateToken = async (req, res, next) => {
   const { authorization } = req.headers;
-  jwt.verify(authorization, jwtKey, (err, decoded) => {
+  jwt.verify(authorization, jwtKey, (err, _decoded) => {
     if (err) {
       return res.status(401).json({ message: 'jwt malformed' });
     }
