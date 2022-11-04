@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { updatePrice } from '../Card';
 import styles from './index.module.css';
 
@@ -12,7 +13,10 @@ export default function SaleCard({ sale }) {
   };
 
   return (
-    <div className={ styles.container }>
+    <Link
+      to={ `/seller/orders/${sale.id}` }
+      className={ styles.container }
+    >
       <div className={ styles.blockOne }>
         <p>Pedido</p>
         <p
@@ -47,7 +51,7 @@ export default function SaleCard({ sale }) {
           { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
 

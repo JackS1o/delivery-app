@@ -2,10 +2,16 @@
   align-items: center;
   border: 1px solid grey;
   border-radius: 10px;
+  color: black;
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
+  text-decoration: none;
   width: 350px;
+}
+
+.container:hover {
+  border: 2px solid green;
 }
 
 .blockOne {
