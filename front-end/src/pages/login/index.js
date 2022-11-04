@@ -23,6 +23,7 @@ function Login() {
     if (callApi.message === 'Usuário não existe') {
       return setInvalidUser(true);
     }
+    console.log(callApi);
     saveUserOnLS(callApi);
     navigate('/customer/products');
   };

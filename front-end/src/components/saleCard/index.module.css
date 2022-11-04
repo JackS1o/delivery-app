@@ -1,0 +1,32 @@
+.container {
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  width: 350px;
+}
+
+.blockOne {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
+
+.blockOne p {
+  margin: 0;
+}
+
+.blockTwo {
+  align-items: center;
+  display: column;
+  justify-content: space-around;
+}
+
+.blockThree {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
