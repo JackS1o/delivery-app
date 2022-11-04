@@ -1,12 +1,10 @@
 import Header from '../../components/Header';
 
-function index() {
+export default function AdminManage() {
   return (
     <div>
       <Header />
-      <h1>Customer Order</h1>
+      <p>Esta é a página de administrador</p>
     </div>
   );
 }
-
-export default index;

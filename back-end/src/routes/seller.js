@@ -6,6 +6,8 @@ const router = express.Router();
 
 router
   .get('/seller', sellerController.getSeller)
-  .post('/sales', tokenValidate.validateToken, sellerController.createSale);
+  .post('/sales', tokenValidate.validateToken, sellerController.createSale)
+  .get('/sales', sellerController.getSales)
+  .get('/sales/:id', sellerController.getSalesById);
 
 module.exports = router;

@@ -3,12 +3,13 @@ import { updatePrice } from '../Card';
 import styles from './index.module.css';
 
 export default function SaleCard({ sale }) {
-  const getDate = () => (
-    sale.saleDate.toLocaleString(
+  const getDate = () => {
+    const date = new Date(sale.saleDate);
+    return date.toLocaleString(
       'pt-BR',
       { dateStyle: 'short' },
-    )
-  );
+    );
+  };
 
   return (
     <div className={ styles.container }>
@@ -52,13 +53,13 @@ export default function SaleCard({ sale }) {
 
 SaleCard.propTypes = {
   sale: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     userId: PropTypes.number,
     sellerId: PropTypes.number,
-    totalPrice: PropTypes.number,
+    totalPrice: PropTypes.string,
     deliveryAddress: PropTypes.string,
-    deliveryNumber: PropTypes.number,
-    saleDate: PropTypes.instanceOf(Date),
+    deliveryNumber: PropTypes.string,
+    saleDate: PropTypes.string,
     status: PropTypes.string,
   }).isRequired,
 };
