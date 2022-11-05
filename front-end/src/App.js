@@ -29,6 +29,7 @@ function App() {
               element={ <Navigate to="/login" /> }
             />
             <Route exact path="/customer" element={ <Customer /> } />
+            <Route exact path="/customer/orders/:id" element={ <CustumerOrder /> } />
             <Route exact path="/customer/orders" element={ <CustumerOrder /> } />
             <Route exact path="/seller/orderDetails" element={ <OrderDetails /> } />
           </Routes>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import requestApi from '../../api/index';
 import { saveUserOnLS } from '../../helpers/localStorage';
+import redirectByRole from '../../helpers/redirectByRole';
 import { loginIsDisabled } from '../../helpers/validations';
 import './style.css';
 
@@ -9,13 +10,21 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [invalidUser, setInvalidUser] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const checkLS = localStorage.getItem('user');
+    if (checkLS.length > 0) {
+      JSON.parse(checkLS);
+      navigate('/customer/products');
+    }
+  }, []);
   const handleEmail = ({ target }) => {
     setEmail(target.value);
   };
   const handlePassword = ({ target }) => {
     setPassword(target.value);
   };
-  const navigate = useNavigate();
 
   const handleClick = async () => {
     const callApi = await requestApi({ email, password });
@@ -23,6 +32,7 @@ function Login() {
       return setInvalidUser(true);
     }
     saveUserOnLS(callApi);
+    redirectByRole(callApi.role, navigate);
     navigate('/customer/products');
   };
 

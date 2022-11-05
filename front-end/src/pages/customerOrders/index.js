@@ -2,27 +2,20 @@ import React, { useEffect, useContext } from 'react';
 import Header from '../../components/Header';
 import OrderCard from '../../components/orderCards';
 import saleContext from '../../context/saleContext';
-// import { getSales } from '../../api/request';
-import salesMock from '../../helpers/salesMock';
+import { getSales } from '../../api/request';
 
 function CustumerOrder() {
-  const { saleCard, setSaleCard } = useContext(saleContext);
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { setSaleCard } = useContext(saleContext);
   useEffect(() => {
-    const mock = salesMock;
-    if (mock.length > 0) {
-      const getAllSales = mock.map((item) => {
-        const data = {
-          id: item.id,
-          status: item.status,
-          date: item.sale_date,
-          price: item.total_price,
-        };
-        return data;
-      });
-      setSaleCard(getAllSales);
-    }
+    const API = async () => {
+      const requestAPI = await getSales();
+      const filteredOrders = requestAPI.filter((item) => item.userId === user.id);
+      setSaleCard(filteredOrders);
+    };
+    API();
   }, []);
-  console.log(`nova branch ${saleCard}`);
+
   return (
     <div>
       <Header />

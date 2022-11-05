@@ -24,7 +24,7 @@ function Header() {
         Produtos
       </Link>
       <Link
-        to="/pedidos"
+        to="/customer/orders"
         data-testid="customer_products__element-navbar-link-orders"
       >
         Meus pedidos
