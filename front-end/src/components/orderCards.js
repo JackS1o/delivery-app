@@ -21,12 +21,13 @@ function OrderCard() {
         <button
           type="button"
           key={ item.id }
-          onClick={ () => navigate(`/customer/orders/${item.userId}`) }
+          onClick={ () => navigate(`/customer/orders/${item.id}`) }
         >
           <div
             className="card-order-container"
             data-testid={ `customer_orders__element-order-id-${item.userId}` }
           >
+            {console.log(item)}
             <p data-testid={ `customer_orders__element-order-id-${item.id}` }>
               {`Pedido ${item.id}`}
             </p>
