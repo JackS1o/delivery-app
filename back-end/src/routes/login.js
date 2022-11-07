@@ -7,6 +7,6 @@ const router = express.Router();
 router
   .post('/login',
   middleLogin.existentUser,
-  loginController.getAll)
+  loginController.getAll);
 
 module.exports = router;

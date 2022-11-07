@@ -32,7 +32,8 @@ const getUser = async (mail) => {
 const getAll = async () => {
   const users = await user.findAll();
   return users;
-}
+};
+
 module.exports = {
   createUser,
   getUser,

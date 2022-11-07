@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import userRequest from '../../api/userRequest';
+import userRequest from '../../../api/userRequest';
 
 function Table() {
   const [returnApi, setReturnApi] = useState([]);

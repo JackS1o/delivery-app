@@ -19,9 +19,9 @@ const getAll = async (req, res) => {
  };
  
  const getAllUsers = async (req, res) => {
-  const getUsers = await userService.getAll()
+  const getUsers = await userService.getAll();
   return res.status(200).json(getUsers);
- }
+ };
 
 module.exports = {
   createUser,
