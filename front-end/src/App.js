@@ -6,29 +6,35 @@ import Login from './pages/login';
 import CustomerProducts from './pages/customerProducts';
 import Customer from './pages/customer';
 import ContextProvider from './context/customerProvider';
+import SaleProvider from './context/saleProvider';
 import Checkout from './pages/checkout';
-import CustomerOrder from './pages/customerOrder';
+import CustumerOrder from './pages/customerOrders';
+import OrderDetails from './pages/sellerOrderDetails/orderDetails';
 
 function App() {
   return (
     <ContextProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/customer/products" element={ <CustomerProducts /> } />
-          <Route exact path="/login" element={ <Login /> } />
-          <Route exact path="/register" element={ <Register /> } />
-          <Route exact path="/404" element={ <NotFound /> } />
-          <Route exact path="*" element={ <Navigate to="/404" replace /> } />
-          <Route exact path="/customer/checkout" element={ <Checkout /> } />
-          <Route
-            exact
-            path="/"
-            element={ <Navigate to="/login" /> }
-          />
-          <Route exact path="/customer" element={ <Customer /> } />
-          <Route exact path="/customer/orders/:id" element={ <CustomerOrder /> } />
-        </Routes>
-      </BrowserRouter>
+      <SaleProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/customer/products" element={ <CustomerProducts /> } />
+            <Route exact path="/login" element={ <Login /> } />
+            <Route exact path="/register" element={ <Register /> } />
+            <Route exact path="/404" element={ <NotFound /> } />
+            <Route exact path="*" element={ <Navigate to="/404" replace /> } />
+            <Route exact path="/customer/checkout" element={ <Checkout /> } />
+            <Route
+              exact
+              path="/"
+              element={ <Navigate to="/login" /> }
+            />
+            <Route exact path="/customer" element={ <Customer /> } />
+            <Route exact path="/customer/orders/:id" element={ <CustumerOrder /> } />
+            <Route exact path="/customer/orders" element={ <CustumerOrder /> } />
+            <Route exact path="/seller/orderDetails" element={ <OrderDetails /> } />
+          </Routes>
+        </BrowserRouter>
+      </SaleProvider>
     </ContextProvider>
   );
 }

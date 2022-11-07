@@ -46,9 +46,9 @@ function Checkout() {
       order: newCart,
     };
     const createSale = await saleCreate(order);
-    navigate(`/customer/orders/${createSale.id}`);
+    console.log(createSale);
+    navigate(`/customer/orders/${createSale.userId}`);
   };
-
   return (
     <div>
       <header>

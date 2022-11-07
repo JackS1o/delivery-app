@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getUserFromLS } from '../helpers/localStorage';
+import './Header.css';
 
 function Header() {
   const [user, setUser] = useState({});
@@ -23,7 +24,7 @@ function Header() {
         Produtos
       </Link>
       <Link
-        to="/pedidos"
+        to="/customer/orders"
         data-testid="customer_products__element-navbar-link-orders"
       >
         Meus pedidos
