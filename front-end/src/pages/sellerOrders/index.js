@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getSales from '../../api/getSales';
-import Header from '../../components/Header';
+import Header from '../../components/header/Header';
 import SaleCard from '../../components/saleCard';
 import { getUserFromLS } from '../../helpers/localStorage';
 

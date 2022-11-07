@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Cards, { updatePrice } from '../../components/Card';
-import Header from '../../components/Header';
+import Cards, { updatePrice } from '../../components/Card/Card';
+import Header from '../../components/header/Header';
 import CustomerContext from '../../context/customerContext';
 import getProducts from '../../api/request';
 import { getUserFromLS } from '../../helpers/localStorage';

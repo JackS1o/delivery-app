@@ -9,5 +9,5 @@ router
   .post('/sales', tokenValidate.validateToken, sellerController.createSale)
   .get('/sales', sellerController.getSales)
   .get('/sales/:id', sellerController.getSalesById);
-
+  
 module.exports = router;

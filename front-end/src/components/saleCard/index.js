@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { updatePrice } from '../Card';
+import { updatePrice } from '../Card/Card';
 import styles from './index.module.css';
 
 export default function SaleCard({ sale }) {

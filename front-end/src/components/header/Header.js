@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserFromLS } from '../helpers/localStorage';
+import { getUserFromLS } from '../../helpers/localStorage';
+import './Header.css';
 
 const getByUserRole = {
   customer: 'Produtos',
@@ -31,7 +32,7 @@ function Header() {
       {
         user.role === 'customer' && (
           <Link
-            to="/pedidos"
+            to="/customer/orders"
             data-testid="customer_products__element-navbar-link-orders"
           >
             Meus pedidos
