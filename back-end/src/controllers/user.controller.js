@@ -17,8 +17,14 @@ const getAll = async (req, res) => {
   const getUser = await userService.getUser(email);
   return res.status(200).json(getUser);
  };
+ 
+ const getAllUsers = async (req, res) => {
+  const getUsers = await userService.getAll()
+  return res.status(200).json(getUsers);
+ }
 
 module.exports = {
   createUser,
   getAll,
+  getAllUsers,
 };

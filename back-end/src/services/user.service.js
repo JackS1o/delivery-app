@@ -28,7 +28,13 @@ const getUser = async (mail) => {
   const { id, name, email, role } = userData.dataValues;
   return { id, name, email, role, token: createToken(userData) };
 };
+
+const getAll = async () => {
+  const users = await user.findAll();
+  return users;
+}
 module.exports = {
   createUser,
   getUser,
+  getAll,
 };
