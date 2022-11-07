@@ -1,10 +1,18 @@
+import { useEffect, useState } from 'react';
+import userRequest from '../../api/userRequest';
 import Header from '../../components/header/Header';
+import Table from '../../components/usersTable';
 
 export default function AdminManage() {
+  const [returnApi, setReturnApi] = useState([]);
+  useEffect(() => {
+    userRequest().then((response) => setReturnApi(response));
+  }, []);
   return (
     <div>
       <Header />
       <section>
+        {console.log(returnApi)}
         <h3>Cadastrar novo usuário</h3>
         <form>
           <label htmlFor="nome-novo-usuario">
@@ -53,40 +61,7 @@ export default function AdminManage() {
       </section>
       <section>
         <h3>Lista de usuários</h3>
-        <table>
-          <thead>
-            <th>Item</th>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Tipo</th>
-            <th>Excluir</th>
-          </thead>
-          <tbody>
-            <td
-              data-testid="admin_manage__element-user-table-item-number-<index>"
-            >
-              nº id
-            </td>
-            <td data-testid="admin_manage__element-user-table-name-<index>">Fulana</td>
-            <td
-              data-testid="admin_manage__element-user-table-email-<index>"
-            >
-              fulana@deliveryapp.com
-            </td>
-            <td
-              data-testid="admin_manage__element-user-table-role-<index>"
-            >
-              P. Vendedora
-            </td>
-            <button
-              type="button"
-              data-testid="admin_manage__element-user-table-remove-<index>"
-            >
-              Excluir
-            </button>
-
-          </tbody>
-        </table>
+        <Table />
       </section>
     </div>
   );
