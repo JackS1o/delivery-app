@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
+import SaleContext from '../../../context/saleContext';
 import userRequest from '../../../api/userRequest';
 
 function Table() {
-  const [returnApi, setReturnApi] = useState([]);
+  const { users, setUser } = useContext(SaleContext);
+
   useEffect(() => {
     userRequest()
-      .then((response) => setReturnApi(response.filter((item) => (
+      .then((response) => setUser(response.filter((item) => (
         item.role !== 'administrator'))));
   }, []);
+  const handleClick = () => {
+    console.log('click');
+  };
   const renderUsersTable = () => {
-    const mapUsers = returnApi.map((user, index) => (
+    const mapUsers = users.map((user, index) => (
       <tr key={ user.id }>
         <td
           data-testid={ `admin_manage__element-user-table-item-number-${index}` }
@@ -33,6 +38,7 @@ function Table() {
         </td>
         <button
           type="button"
+          onClick={ handleClick }
           data-testid={ `admin_manage__element-user-table-remove-${index}` }
         >
           Excluir

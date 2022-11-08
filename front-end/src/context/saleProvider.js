@@ -4,11 +4,14 @@ import SaleContext from './saleContext';
 
 export default function SaleProvider({ children }) {
   const [saleCard, setSaleCard] = useState([]);
+  const [users, setUser] = useState([]);
 
   const context = useMemo(() => ({
+    users,
     saleCard,
     setSaleCard,
-  }), [saleCard]);
+    setUser,
+  }), [saleCard, users]);
 
   return (
     <SaleContext.Provider value={ context }>
