@@ -12,4 +12,22 @@ const validateToken = async (req, res, next) => {
   next();
 };
 
-module.exports = { validateToken };
+const validateAdmin = (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    const { role } = jwt.verify(authorization, jwtKey);
+    if (!role || role !== 'administrator') {
+      return res.status(401).json({
+        message: 'você não tem permissão para cadastrar novos usuários',
+      });
+    }
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'jwt malformed' });
+  }
+};
+
+module.exports = {
+  validateToken,
+  validateAdmin,
+};

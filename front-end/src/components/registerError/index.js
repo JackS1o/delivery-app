@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
-function RegisterError({ message }) {
+function RegisterError({ message, type }) {
   return (
     <span
-      data-testid="common_register__element-invalid_register"
+      data-testid={ `${type}_register__element-invalid_register` }
     >
       <p>{ message }</p>
     </span>
@@ -12,6 +12,7 @@ function RegisterError({ message }) {
 
 RegisterError.propTypes = {
   message: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default RegisterError;
