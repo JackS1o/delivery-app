@@ -11,6 +11,7 @@ const validateToken = async (req, res, next) => {
   });
   next();
 };
+
 const validateAdmin = (req, res, next) => {
   try {
     const { authorization } = req.headers;
@@ -26,4 +27,7 @@ const validateAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { validateToken, validateAdmin };
+module.exports = {
+  validateToken,
+  validateAdmin,
+};

@@ -2,6 +2,7 @@ const userService = require('../services/user.service');
 const { internalServerError } = require('../errors/messages');
 
 const createUser = async (req, res) => {
+  const { role } = req.query;
   try {
     const user = await userService.createUser(req.body, role);
     return res.status(201).json(user);
