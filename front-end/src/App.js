@@ -8,8 +8,10 @@ import Customer from './pages/customer';
 import ContextProvider from './context/customerProvider';
 import SaleProvider from './context/saleProvider';
 import Checkout from './pages/checkout';
-import CustumerOrder from './pages/customerOrders';
-import OrderDetails from './pages/sellerOrderDetails/orderDetails';
+import SellerOrders from './pages/sellerOrders';
+import AdminManage from './pages/adminManage';
+import SellerOrderDetail from './pages/sellerOrderDetail';
+import CustomerOrder from './pages/customerOrders';
 
 function App() {
   return (
@@ -29,9 +31,11 @@ function App() {
               element={ <Navigate to="/login" /> }
             />
             <Route exact path="/customer" element={ <Customer /> } />
-            <Route exact path="/customer/orders/:id" element={ <CustumerOrder /> } />
-            <Route exact path="/customer/orders" element={ <CustumerOrder /> } />
-            <Route exact path="/seller/orderDetails" element={ <OrderDetails /> } />
+            <Route exact path="/customer/orders" element={ <CustomerOrder /> } />
+            <Route exact path="/customer/orders/:id" element={ <CustomerOrder /> } />
+            <Route exact path="/seller/orders" element={ <SellerOrders /> } />
+            <Route exact path="/seller/orders/:id" element={ <SellerOrderDetail /> } />
+            <Route exact path="/admin/manage" element={ <AdminManage /> } />
           </Routes>
         </BrowserRouter>
       </SaleProvider>

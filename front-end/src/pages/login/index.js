@@ -14,7 +14,7 @@ function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     const checkLS = localStorage.getItem('user');
-    if (checkLS.length > 0) {
+    if (checkLS) {
       JSON.parse(checkLS);
       navigate('/customer/products');
     }
@@ -33,7 +33,6 @@ function Login() {
     }
     saveUserOnLS(callApi);
     redirectByRole(callApi.role, navigate);
-    navigate('/customer/products');
   };
 
   return (

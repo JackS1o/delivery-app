@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
-import Header from '../../components/Header';
-import OrderCard from '../../components/orderCards';
+import Header from '../../components/header/Header';
+import OrderCard from '../../components/orderCard/orderCards';
 import saleContext from '../../context/saleContext';
 import { getSales } from '../../api/request';
 
-function CustumerOrder() {
+function CustomerOrder() {
   const user = JSON.parse(localStorage.getItem('user'));
   const { setSaleCard } = useContext(saleContext);
   useEffect(() => {
@@ -23,4 +23,4 @@ function CustumerOrder() {
     </div>
   );
 }
-export default CustumerOrder;
+export default CustomerOrder;

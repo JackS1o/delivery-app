@@ -7,6 +7,7 @@ import endpoints from '../../helpers/backendEndpoints';
 import isNewUserValid from '../../helpers/isNewUserValid';
 import responseStatus from '../../helpers/responseStatus';
 import { saveUserOnLS } from '../../helpers/localStorage';
+import redirectByRole from '../../helpers/redirectByRole';
 
 function Register() {
   const [newUser, setNewUser] = useState(INITIAL_NEW_USER);
@@ -40,7 +41,7 @@ function Register() {
       setServerResponse(res.data);
       if (res.status === responseStatus.created) {
         saveUserOnLS(res.data);
-        navigate('/customer/products');
+        redirectByRole(res.data.role, navigate);
       }
     } catch ({ response: { data: { message } } }) {
       setServerResponse({ message });
