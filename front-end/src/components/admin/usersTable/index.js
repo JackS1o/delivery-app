@@ -4,7 +4,9 @@ import userRequest from '../../../api/userRequest';
 function Table() {
   const [returnApi, setReturnApi] = useState([]);
   useEffect(() => {
-    userRequest().then((response) => setReturnApi(response));
+    userRequest()
+      .then((response) => setReturnApi(response.filter((item) => (
+        item.role !== 'administrator'))));
   }, []);
   const renderUsersTable = () => {
     const mapUsers = returnApi.map((user, index) => (

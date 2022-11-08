@@ -16,7 +16,7 @@ function Login() {
     const checkLS = localStorage.getItem('user');
     if (checkLS) {
       JSON.parse(checkLS);
-      navigate('/customer/products');
+      redirectByRole(callApi.role, navigate);
     }
   }, []);
   const handleEmail = ({ target }) => {

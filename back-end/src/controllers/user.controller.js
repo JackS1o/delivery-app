@@ -3,7 +3,7 @@ const { internalServerError } = require('../errors/messages');
 
 const createUser = async (req, res) => {
   try {
-    const user = await userService.createUser(req.body, 'customer');
+    const user = await userService.createUser(req.body, role);
     return res.status(201).json(user);
   } catch (error) {
     console.log(error);

@@ -5,6 +5,7 @@ const blockInvalidUser = require('../middlewares/blockInvalidUser');
 const router = express.Router();
 
 router
-  .post('/register', blockInvalidUser, UserController.createUser);
+  .post('/register', blockInvalidUser, UserController.createUser)
+  .post('/admin/manage', blockInvalidUser, validateAdmin, UserController.createUser);
 
 module.exports = router;
