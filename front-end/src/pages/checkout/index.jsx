@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CustomerContext from '../../context/customerContext';
 import { sellerRequest, saleCreate } from '../../api/sellerRequest';
-import Header from '../../components/Header';
+import Header from '../../components/header/Header';
 
 function Checkout() {
   const { cartProducts } = useContext(CustomerContext);
@@ -47,9 +47,9 @@ function Checkout() {
       order: newCart,
     };
     const createSale = await saleCreate(order);
+    console.log(createSale);
     navigate(`/customer/orders/${createSale.id}`);
   };
-
   return (
     <div>
       <Header />

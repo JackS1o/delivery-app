@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import CustomerContext from '../context/customerContext';
-import '../App.css';
+import CustomerContext from '../../context/customerContext';
+// import '../App.css';
 
 export const updatePrice = (price) => Number(price).toFixed(2).replace('.', ',');
 
@@ -67,7 +67,9 @@ function Cards({ product }) {
       </p>
       <div className="img-cards">
         <img
+          width="100px"
           data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+          height="200px"
           src={ product.url_image }
           alt={ product.name }
         />

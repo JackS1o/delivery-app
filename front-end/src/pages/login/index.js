@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import requestApi from '../../api/index';
 import { saveUserOnLS } from '../../helpers/localStorage';
+import redirectByRole from '../../helpers/redirectByRole';
 import { loginIsDisabled } from '../../helpers/validations';
+import './style.css';
 
-// - 5: common_login__element-invalid-email [Elemento oculto (Mensagens de erro)];
-// data-testid pra mensagem de erro;
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [invalidUser, setInvalidUser] = useState(false);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const checkLS = localStorage.getItem('user');
+    if (checkLS) {
+      JSON.parse(checkLS);
+      navigate('/customer/products');
+    }
+  }, []);
   const handleEmail = ({ target }) => {
     setEmail(target.value);
   };
   const handlePassword = ({ target }) => {
     setPassword(target.value);
   };
-  const navigate = useNavigate();
 
   const handleClick = async () => {
     const callApi = await requestApi({ email, password });
@@ -24,7 +32,7 @@ function Login() {
       return setInvalidUser(true);
     }
     saveUserOnLS(callApi);
-    navigate('/customer/products');
+    redirectByRole(callApi.role, navigate);
   };
 
   return (
@@ -35,7 +43,7 @@ function Login() {
           type="email"
           name="email"
           value={ email }
-          placeholder="Insira seu Email"
+          placeholder="Insira seu email"
           onChange={ handleEmail }
         />
         <input
@@ -52,14 +60,14 @@ function Login() {
           disabled={ loginIsDisabled({ email, password }) }
           onClick={ handleClick }
         >
-          clicar
+          Login
         </button>
         <button
           type="button"
           data-testid="common_login__button-register"
           onClick={ () => navigate('/register') }
         >
-          cadastrar
+          Cadastrar
         </button>
       </form>
       {invalidUser && (
