@@ -17,9 +17,21 @@ const getAll = async (req, res) => {
   const { email } = req.body;
   const getUser = await userService.getUser(email);
   return res.status(200).json(getUser);
- };
+};
+
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  const result = await userService.deleteUser(id);
+  if (!result) {
+    return res.status(500).json({ message: 'algo deu errado...' });
+  }
+  return res.status(200).json({
+    message: 'Usuário removido com sucesso.'
+  });
+};
 
 module.exports = {
   createUser,
   getAll,
+  deleteUser,
 };

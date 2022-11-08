@@ -7,6 +7,7 @@ const router = express.Router();
 
 router
   .post('/register', blockInvalidUser, UserController.createUser)
-  .post('/admin/manage', blockInvalidUser, validateAdmin, UserController.createUser);
+  .post('/admin/manage', blockInvalidUser, validateAdmin, UserController.createUser)
+  .delete('/admin/manage/delete/:id', validateAdmin, UserController.deleteUser);
 
 module.exports = router;

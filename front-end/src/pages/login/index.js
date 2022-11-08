@@ -15,8 +15,8 @@ function Login() {
   useEffect(() => {
     const checkLS = localStorage.getItem('user');
     if (checkLS) {
-      JSON.parse(checkLS);
-      redirectByRole(callApi.role, navigate);
+      const getUser = JSON.parse(checkLS);
+      redirectByRole(getUser.role, navigate);
     }
   }, []);
   const handleEmail = ({ target }) => {

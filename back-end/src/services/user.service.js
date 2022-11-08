@@ -28,7 +28,14 @@ const getUser = async (mail) => {
   const { id, name, email, role } = userData.dataValues;
   return { id, name, email, role, token: createToken(role) };
 };
+
+const deleteUser = async (id) => {
+  const response = await user.destroy({ where: { id } });
+  return response;
+};
+
 module.exports = {
   createUser,
   getUser,
+  deleteUser,
 };
