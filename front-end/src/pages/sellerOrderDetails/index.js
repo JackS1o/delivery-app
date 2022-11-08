@@ -26,35 +26,36 @@ function SellerOrderDetails() {
     return (acc + totalValue);
   }, 0);
 
-  return (
+  return !order ? (<div>Loading</div>) : (
     <div>
       <Header />
       <h1>Detalhes de Pedido</h1>
       <div>
         <p
-          data-testid={ `
-        seller_order_details__element-order-details-label-order-${order[0]?.id}` }
+          data-testid="seller_order_details__element-order-details-label-order-id"
         >
           {`Pedido - ${order[0]?.id}`}
         </p>
         <p
-          data-testid={ `
-        seller_order_details__element-order-details-label-order-date` }
+          data-testid="seller_order_details__element-order-details-label-order-date"
         >
           {getDate(order)}
         </p>
         <p
-          data-testid={ `
-            seller_order_details__element-order-details-label-delivery-status` }
+          data-testid="seller_order_details__element-order-details-label-delivery-status"
         >
           {order[0]?.status}
         </p>
-        <p data-testid="seller_order_details__button-preparing-check">
+        <button type="button" data-testid="seller_order_details__button-preparing-check">
           Preparar Pedido
-        </p>
-        <p data-testid="seller_order_details__button-dispatch-check">
+        </button>
+        <button
+          type="button"
+          data-testid="seller_order_details__button-dispatch-check"
+          disabled="true"
+        >
           Saiu Para Entrega
-        </p>
+        </button>
         <table>
           <thead>
             <th>Item</th>
@@ -65,8 +66,9 @@ function SellerOrderDetails() {
             {products?.products.map((prod, index) => (
               <tr key={ index }>
                 <td
-                  data-testid={ `
-                  seller_order_details__element-order-table-item-number-${index}` }
+                  data-testid={
+                    `seller_order_details__element-order-table-item-number-${index}`
+                  }
                 >
                   {index + 1}
                 </td>
@@ -104,7 +106,9 @@ function SellerOrderDetails() {
           <span
             data-testid={ `seller_orders__element-delivery-status-${order[0]?.id}` }
           />
-          <div>{`Total: R$${result?.toFixed(2).toString().replace('.', ',')}`}</div>
+          <div data-testid="seller_order_details__element-order-total-price">
+            {`Total: R$${result?.toFixed(2).toString().replace('.', ',')}`}
+          </div>
         </table>
       </div>
     </div>

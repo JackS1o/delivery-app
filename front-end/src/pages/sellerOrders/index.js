@@ -17,6 +17,7 @@ export default function SellerOrders() {
       }
       const newSales = await getSales(user.id);
       setSales(newSales);
+      console.log(newSales);
     };
     getSalesFromDB();
   }, [navigate]);
