@@ -9,6 +9,7 @@ router
   .post('/sales', tokenValidate.validateToken, sellerController.createSale)
   .get('/sales', sellerController.getSales)
   .get('/sales/:id', sellerController.getSalesById)
-  .get('/seller/:id', sellerController.getSalesBySellerId);
+  .get('/seller/:id', sellerController.getSalesBySellerId)
+  .get('/seller/:id', sellerController.getSellerById);
   
 module.exports = router;
