@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/Header';
 import OrderDetailTable from '../../components/orderDetail/orderDetail';
-import { getSalesById } from '../../api/request';
+import { getSalesById, getSellerById } from '../../api/request';
 
 const dataTestid = 'customer_order_details__element-order-details-label-';
 
 export default function CustomerOrderDetail() {
+  const { id } = useParams();
   const [products, setProducts] = useState([]);
-  const [order, setOrder] = useState({
-    id: 0,
-    sellerName: '',
-    sale_date: '',
-    status: '',
-    products: [{ id: 0, productPrice: '0', quantity: 0 }],
-    total_price: '0',
-  });
+  const [order, setOrder] = useState([]);
+  const [name, setName] = useState('');
 
   useEffect(() => {
-    const getOrderById = async () => {
-      const result = await getSalesById(order.id);
+    const getOrderDetail = async () => {
+      const result = await getSalesById(id);
       setOrder(result);
-      setProducts(result.products);
+      setProducts(result[0]?.products);
+      getSellerById(result[0]?.sellerId).then((sellerName) => setName(sellerName.name));
     };
-    getOrderById();
-  }, [order.id]);
+    getOrderDetail();
+  }, []);
 
   function dataAtualFormatada(date) {
     const data = new Date(date);
@@ -38,27 +35,31 @@ export default function CustomerOrderDetail() {
       <Header />
       <h3>Detalhe do Pedido</h3>
       <div>
-        <p data-testid={ `${dataTestid}order-id` }>
-          { `${order.id}` }
-        </p>
-        <p data-testid={ `${dataTestid}seller-name` }>
-          { `${order.sellerName}` }
-        </p>
-        <p data-testid={ `${dataTestid}order-date` }>
-          { `${dataAtualFormatada(order.sale_date)}` }
-        </p>
-        <p
-          data-testid={ `${dataTestid}delivery-status` }
-        >
-          { order.status }
-        </p>
-        <button
-          data-testid="customer_order_details__button-delivery-check"
-          type="button"
-          disabled={ order.status !== 'Em Trânsito' }
-        >
-          MARCAR COMO ENTREGUE
-        </button>
+        { order?.length > 0 && (
+          <div>
+            <p data-testid={ `${dataTestid}order-id` }>
+              { order[0].id }
+            </p>
+            <p data-testid={ `${dataTestid}seller-name` }>
+              { `${name}` }
+            </p>
+            <p data-testid={ `${dataTestid}order-date` }>
+              { `${dataAtualFormatada(order[0].saleDate)}` }
+            </p>
+            <p
+              data-testid={ `${dataTestid}delivery-status` }
+            >
+              { order[0].status }
+            </p>
+            <button
+              data-testid="customer_order_details__button-delivery-check"
+              type="button"
+              disabled={ order.status !== 'Em Trânsito' }
+            >
+              MARCAR COMO ENTREGUE
+            </button>
+          </div>
+        )}
       </div>
       <div>
         {products && (
@@ -69,7 +70,7 @@ export default function CustomerOrderDetail() {
         <p
           data-testid="customer_order_details__element-order-total-price"
         >
-          { `Total: R$ ${order.total_price}` }
+          { `${order[0]?.totalPrice.replace('.', ',')}` }
         </p>
       </div>
     </div>
