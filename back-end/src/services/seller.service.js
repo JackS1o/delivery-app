@@ -38,7 +38,7 @@ const getSalesById = async (sellerId) => {
 const getSellerById = async (id) => {
   const seller = await user.findOne({ where: { id } });
   return seller;
-}
+};
 
 module.exports = {
   getSeller,
