@@ -10,6 +10,7 @@ const sellerRequest = async () => {
 const saleCreate = async (order) => {
   const url = 'http://localhost:3001/sales';
   const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
   const newSale = await axios.post(
     url,
     {
