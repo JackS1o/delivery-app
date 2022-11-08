@@ -27,7 +27,6 @@ function OrderCard() {
             className="card-order-container"
             data-testid={ `customer_orders__element-order-id-${item.userId}` }
           >
-            {console.log(item)}
             <p data-testid={ `customer_orders__element-order-id-${item.id}` }>
               {`Pedido ${item.id}`}
             </p>
@@ -53,7 +52,6 @@ function OrderCard() {
         </button>
       ))}
     </section>
-
   );
 }
 export default OrderCard;
