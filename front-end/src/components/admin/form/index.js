@@ -14,6 +14,7 @@ function Form() {
   const [invalidUser, setInvalidUser] = useState(false);
   const [errMsg, setErrMsg] = useState('');
   const handleEmail = ({ target }) => {
+    setInvalidUser(false);
     setEmail(target.value);
   };
   const handleRole = ({ target }) => {
@@ -23,6 +24,7 @@ function Form() {
     setPassword(target.value);
   };
   const handleName = ({ target }) => {
+    setInvalidUser(false);
     setName(target.value);
   };
   const LS = () => {
