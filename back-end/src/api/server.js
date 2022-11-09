@@ -5,13 +5,15 @@ const loginRouter = require('../routes/login');
 const customerRouter = require('../routes/customer');
 const imageRouter = require('../routes/images');
 const sellerRouter = require('../routes/seller');
+const userRouter = require('../routes/user');
 
 app
   .use(registerRouter)
   .use(loginRouter)
   .use(customerRouter)
   .use(imageRouter)
-  .use(sellerRouter);
+  .use(sellerRouter)
+  .use(userRouter);
 
 app.listen(port);
 console.log(`Api rodando na porta ${port}`);

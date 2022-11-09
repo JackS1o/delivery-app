@@ -29,9 +29,15 @@ const deleteUser = async (req, res) => {
     message: 'Usuário removido com sucesso.',
   });
 };
+ 
+const getAllUsers = async (req, res) => {
+const getUsers = await userService.getAll();
+return res.status(200).json(getUsers);
+};
 
 module.exports = {
   createUser,
   getAll,
   deleteUser,
+  getAllUsers,
 };

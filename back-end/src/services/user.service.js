@@ -34,8 +34,14 @@ const deleteUser = async (id) => {
   return response;
 };
 
+const getAll = async () => {
+  const users = await user.findAll();
+  return users;
+};
+
 module.exports = {
   createUser,
   getUser,
   deleteUser,
+  getAll,
 };

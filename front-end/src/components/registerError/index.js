@@ -9,7 +9,6 @@ function RegisterError({ message, type }) {
     </span>
   );
 }
-
 RegisterError.propTypes = {
   message: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
