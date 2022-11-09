@@ -46,6 +46,7 @@ const getSalesBySellerId = async (sellerId) => {
   const sales = await sale.findAll({
     where: { sellerId },
   });
+  console.log(sales);
   return sales;
 };
 

@@ -5,6 +5,7 @@ const loginRouter = require('../routes/login');
 const customerRouter = require('../routes/customer');
 const imageRouter = require('../routes/images');
 const sellerRouter = require('../routes/seller');
+const userRouter = require('../routes/user');
 const salesProductsRouter = require('../routes/salesProducts');
 
 app
@@ -13,6 +14,7 @@ app
   .use(customerRouter)
   .use(imageRouter)
   .use(sellerRouter)
+  .use(userRouter)
   .use(salesProductsRouter);
 
 app.listen(port);
