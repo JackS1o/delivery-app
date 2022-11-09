@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { updatePrice } from '../Card/Card';
-import getTotalPrice from '../../pages/customerProducts';
 
 export default function OrderDetailTable({ Products }) {
   return (
@@ -16,7 +15,7 @@ export default function OrderDetailTable({ Products }) {
         </tr>
       </thead>
       <tbody>
-        {Products.map((product, index) => (
+        {Products?.map((element, index) => (
           <tr key={ index }>
             <td
               data-testid={ `customer_order_details_
@@ -28,25 +27,25 @@ export default function OrderDetailTable({ Products }) {
               data-testid={ `customer_order_details_
               _element-order-table-name-${index}` }
             >
-              { product.name }
+              { element.name }
             </td>
             <td
               data-testid={ `customer_order_details_
               _element-order-table-quantity-${index}` }
             >
-              { quantity }
+              { element.product.quantity }
             </td>
             <td
               data-testid={ `customer_order_details_
               _element-order-table-unit-price-${index}` }
             >
-              { product.price.updatePrice(getTotalPrice) }
+              { element.price }
             </td>
             <td
               data-testid={ `customer_order_details_
               _element-order-table-sub-total-${index}` }
             >
-              { updatePrice(getTotalPrice) }
+              { updatePrice(element.price * element.product.quantity) }
             </td>
           </tr>
         ))}

@@ -27,10 +27,15 @@ export default function SellerOrders() {
       <main>
         {
           sales.map((sale) => (
-            <SaleCard
+            <button
+              type="button"
               key={ sale.id }
-              sale={ sale }
-            />
+              onClick={ () => navigate(`/seller/orders/${sale.id}`) }
+            >
+              <SaleCard
+                sale={ sale }
+              />
+            </button>
           ))
         }
       </main>

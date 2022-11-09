@@ -10,9 +10,9 @@ import SaleProvider from './context/saleProvider';
 import Checkout from './pages/checkout';
 import SellerOrders from './pages/sellerOrders';
 import AdminManage from './pages/adminManage';
+import SellerOrderDetail from './pages/sellerOrderDetails';
 import CustomerOrder from './pages/customerOrders';
 import CustomerOrderDetail from './pages/customerOrderDetail';
-import SellerOrderDetail from './pages/sellerOrderDetail';
 
 function App() {
   return (
