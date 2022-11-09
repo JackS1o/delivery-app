@@ -1,17 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/header/Header';
-import { sellerOrder, sellerProducts } from '../../api/sellerOrderDetails';
+import { sellerOrder, sellerProducts, orderStatus } from '../../api/sellerOrderDetails';
 
 function SellerOrderDetails() {
   const { id } = useParams();
   const [order, setOrder] = useState([]);
   const [products, setProducts] = useState();
+  const [disabled, setDisabled] = useState({
+    preparingDisabled: false,
+    deliveredDisabled: true,
+  });
 
   useEffect(() => {
     sellerOrder(id).then((response) => setOrder(response));
     sellerProducts(id).then((response) => setProducts(response));
-  }, []);
+    console.log(order[0]?.status);
+    if (order[0]?.status === 'Preparando'
+    || order[0]?.status === 'Entregue') {
+      setDisabled({
+        preparingDisabled: true,
+      });
+    }
+    if (order[0]?.status === 'Pendente'
+    || order[0]?.status === 'Entregue') {
+      setDisabled({
+        deliveredDisabled: true,
+      });
+    }
+    if (order[0]?.status === 'Em Trânsito') {
+      setDisabled({
+        preparingDisabled: true,
+        deliveredDisabled: true,
+      });
+    }
+  }, [id, order[0]?.status]);
 
   const getDate = (orders) => {
     const date = new Date(orders[0]?.saleDate);
@@ -25,6 +48,18 @@ function SellerOrderDetails() {
     const totalValue = Number(curr.price * curr.product.quantity);
     return (acc + totalValue);
   }, 0);
+
+  const preparingOrder = async () => {
+    await orderStatus(id, 'Preparando');
+    const newOrder = await sellerOrder(id);
+    setOrder(newOrder);
+  };
+
+  const delivered = async () => {
+    await orderStatus(id, 'Em Trânsito');
+    const newOrder = await sellerOrder(id);
+    setOrder(newOrder);
+  };
 
   return !order ? (<div>Loading</div>) : (
     <div>
@@ -46,13 +81,19 @@ function SellerOrderDetails() {
         >
           {order[0]?.status}
         </p>
-        <button type="button" data-testid="seller_order_details__button-preparing-check">
+        <button
+          type="button"
+          data-testid="seller_order_details__button-preparing-check"
+          disabled={ disabled.preparingDisabled }
+          onClick={ preparingOrder }
+        >
           Preparar Pedido
         </button>
         <button
           type="button"
           data-testid="seller_order_details__button-dispatch-check"
-          disabled="true"
+          disabled={ disabled.deliveredDisabled }
+          onClick={ delivered }
         >
           Saiu Para Entrega
         </button>

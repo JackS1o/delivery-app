@@ -18,4 +18,17 @@ const sellerProducts = async (id) => {
   return products;
 };
 
-export { sellerOrder, sellerProducts };
+const orderStatus = async (id, status) => {
+  const url = `http://localhost:3001/sales/${id}`;
+  const order = await axios
+    .put(url, { status })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+  return order;
+};
+
+export {
+  sellerOrder,
+  sellerProducts,
+  orderStatus,
+};
