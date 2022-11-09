@@ -15,7 +15,6 @@ function SellerOrderDetails() {
   useEffect(() => {
     sellerOrder(id).then((response) => setOrder(response));
     sellerProducts(id).then((response) => setProducts(response));
-    console.log(order[0]?.status);
     if (order[0]?.status === 'Preparando'
     || order[0]?.status === 'Entregue') {
       setDisabled({

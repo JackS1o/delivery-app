@@ -10,7 +10,7 @@ router
   .get('/sales', sellerController.getSales)
   .get('/sales/:id', sellerController.getSalesById)
   .get('/seller/:id', sellerController.getSalesBySellerId)
-  .get('/seller/:id', sellerController.getSellerById)
+  .get('/sellerName/:id', sellerController.getSellerById)
   .put('/sales/:id', sellerController.updateSaleStatus);
   
 module.exports = router;

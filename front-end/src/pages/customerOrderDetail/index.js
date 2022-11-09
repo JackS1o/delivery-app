@@ -8,7 +8,6 @@ const dataTestid = 'customer_order_details__element-order-details-label-';
 
 export default function CustomerOrderDetail() {
   const { id } = useParams();
-  const [products, setProducts] = useState([]);
   const [order, setOrder] = useState([]);
   const [name, setName] = useState('');
 
@@ -16,11 +15,10 @@ export default function CustomerOrderDetail() {
     const getOrderDetail = async () => {
       const result = await getSalesById(id);
       setOrder(result);
-      setProducts(result[0]?.products);
-      getSellerById(result[0]?.sellerId).then((sellerName) => setName(sellerName.name));
+      getSellerById(id).then((sellerName) => setName(sellerName));
     };
     getOrderDetail();
-  }, []);
+  }, [id]);
 
   function dataAtualFormatada(date) {
     const data = new Date(date);
@@ -30,6 +28,11 @@ export default function CustomerOrderDetail() {
     return `${`${dia}/${mes}/${ano}`}`;
   }
 
+  const result = name.items?.products.reduce((acc, curr) => {
+    const totalValue = Number(curr.price * curr.product.quantity);
+    return (acc + totalValue);
+  }, 0);
+
   return (
     <div>
       <Header />
@@ -38,10 +41,10 @@ export default function CustomerOrderDetail() {
         { order?.length > 0 && (
           <div>
             <p data-testid={ `${dataTestid}order-id` }>
-              { order[0].id }
+              {`Pedido ${order[0].id}` }
             </p>
             <p data-testid={ `${dataTestid}seller-name` }>
-              { `${name}` }
+              { `P.Vend: ${name.seller?.name}` }
             </p>
             <p data-testid={ `${dataTestid}order-date` }>
               { `${dataAtualFormatada(order[0].saleDate)}` }
@@ -54,7 +57,7 @@ export default function CustomerOrderDetail() {
             <button
               data-testid="customer_order_details__button-delivery-check"
               type="button"
-              disabled={ order.status !== 'Em Trânsito' }
+              disabled={ order[0].status !== 'Em Trânsito' }
             >
               MARCAR COMO ENTREGUE
             </button>
@@ -62,15 +65,13 @@ export default function CustomerOrderDetail() {
         )}
       </div>
       <div>
-        {products && (
-          <OrderDetailTable
-            Products={ products }
-          />
-        )}
+        <OrderDetailTable
+          Products={ name.items?.products }
+        />
         <p
           data-testid="customer_order_details__element-order-total-price"
         >
-          { `${order[0]?.totalPrice.replace('.', ',')}` }
+          {`Total: R$${result?.toFixed(2).toString().replace('.', ',')}`}
         </p>
       </div>
     </div>

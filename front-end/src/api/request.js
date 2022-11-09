@@ -22,7 +22,7 @@ export async function getSalesById(id) {
 }
 
 export async function getSellerById(id) {
-  const result = await axios.get(`http://localhost:3001/seller/${id}`)
+  const result = await axios.get(`http://localhost:3001/sellerName/${id}`)
     .then(({ data }) => data)
     .catch((err) => err.toJSON());
   return result;

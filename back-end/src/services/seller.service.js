@@ -1,17 +1,35 @@
-const { user, sale, salesProducts, sequelize } = require('../database/models');
+const {
+  user,
+  sale,
+  salesProducts,
+  sequelize,
+  products,
+} = require("../database/models");
 
 const getSeller = async () => {
-  const sellerData = await user.findAll({ where: { role: 'seller' } });
+  const sellerData = await user.findAll({ where: { role: "seller" } });
   return sellerData;
 };
 
 const createSale = async (body) => {
-  const { userId, sellerId, totalPrice, deliveryAddress,
-    deliveryNumber, status, order,
+  const {
+    userId,
+    sellerId,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    status,
+    order,
   } = body;
   const result = await sequelize.transaction(async (transaction) => {
-    const saleData = await sale
-    .create({ userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status });
+    const saleData = await sale.create({
+      userId,
+      sellerId,
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
+      status,
+    });
     const products = await order.order.map((product) => ({
       saleId: saleData.dataValues.id,
       productId: product.id,
@@ -43,8 +61,18 @@ const getSalesBySellerId = async (sellerId) => {
 };
 
 const getSellerById = async (id) => {
-  const seller = await user.findOne({ where: { id } });
-  return seller;
+  const items = await sale.findOne({
+    where: { id },
+    include: [
+      {
+        model: products,
+        as: "products",
+        through: { attributes: ["quantity"], as: "product" },
+      },
+    ],
+  });
+  const seller = await user.findOne({ where: { id: items.sellerId } });
+  return { items, seller };
 };
 
 const updateSaleStatus = async (id, status) => {
