@@ -15,19 +15,17 @@ function SellerOrderDetails() {
   useEffect(() => {
     sellerOrder(id).then((response) => setOrder(response));
     sellerProducts(id).then((response) => setProducts(response));
-    if (order[0]?.status === 'Preparando'
-    || order[0]?.status === 'Entregue') {
+    if (order[0]?.status === 'Preparando') {
       setDisabled({
         preparingDisabled: true,
       });
     }
-    if (order[0]?.status === 'Pendente'
-    || order[0]?.status === 'Entregue') {
+    if (order[0]?.status === 'Pendente') {
       setDisabled({
         deliveredDisabled: true,
       });
     }
-    if (order[0]?.status === 'Em Trânsito') {
+    if (order[0]?.status === 'Em Trânsito' || order[0]?.status === 'Entregue') {
       setDisabled({
         preparingDisabled: true,
         deliveredDisabled: true,
