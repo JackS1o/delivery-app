@@ -26,7 +26,7 @@ const deleteUser = async (req, res) => {
     return res.status(500).json({ message: 'algo deu errado...' });
   }
   return res.status(200).json({
-    message: 'Usuário removido com sucesso.'
+    message: 'Usuário removido com sucesso.',
   });
 };
 
