@@ -3,6 +3,7 @@ import createUser from '../../../api/createUser';
 import { registerIsDisabled } from '../../../helpers/validations';
 import SaleContext from '../../../context/saleContext';
 import userRequest from '../../../api/userRequest';
+import RegisterError from '../../registerError';
 
 function Form() {
   const { setUser } = useContext(SaleContext);
@@ -11,6 +12,7 @@ function Form() {
   const [password, setPassword] = useState('');
   const [getRole, setGetRole] = useState('seller');
   const [invalidUser, setInvalidUser] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
   const handleEmail = ({ target }) => {
     setEmail(target.value);
   };
@@ -38,7 +40,8 @@ function Form() {
       await createUser(dataUser, getRole, returnLS);
       requestApi();
       setInvalidUser(false);
-    } catch {
+    } catch ({ response: { data: { message } } }) {
+      setErrMsg(message);
       setInvalidUser(true);
     }
     // if (checkUser) {
@@ -55,9 +58,7 @@ function Form() {
 
   return (
     <div>
-
       <form>
-        {console.log(invalidUser)}
         <label htmlFor="nome-novo-usuario">
           Nome
           <input
@@ -114,9 +115,10 @@ function Form() {
         </button>
       </form>
       {invalidUser && (
-        <span data-testid="admin_manage__element-invalid-register">
-          Email ou senha inválidos
-        </span>
+        <RegisterError
+          message={ errMsg }
+          type="admin"
+        />
       )}
     </div>
   );
