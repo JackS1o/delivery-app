@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header from '../../components/header/Header';
 import OrderDetailTable from '../../components/orderDetail/orderDetail';
 import { getSalesById, getSellerById } from '../../api/request';
+import { orderStatus } from '../../api/sellerOrderDetails';
 
 const dataTestid = 'customer_order_details__element-order-details-label-';
 
@@ -18,7 +19,7 @@ export default function CustomerOrderDetail() {
       getSellerById(id).then((sellerName) => setName(sellerName));
     };
     getOrderDetail();
-  }, [id]);
+  }, [id, order[0]?.status]);
 
   function dataAtualFormatada(date) {
     const data = new Date(date);
@@ -32,6 +33,12 @@ export default function CustomerOrderDetail() {
     const totalValue = Number(curr.price * curr.product.quantity);
     return (acc + totalValue);
   }, 0);
+
+  const recived = async () => {
+    await orderStatus(id, 'Entregue');
+    const newOrder = await getSalesById(id);
+    setOrder(newOrder);
+  };
 
   return (
     <div>
@@ -58,6 +65,7 @@ export default function CustomerOrderDetail() {
               data-testid="customer_order_details__button-delivery-check"
               type="button"
               disabled={ order[0].status !== 'Em Trânsito' }
+              onClick={ recived }
             >
               MARCAR COMO ENTREGUE
             </button>
