@@ -14,7 +14,7 @@ app
   .use(customerRouter)
   .use(imageRouter)
   .use(sellerRouter)
-  .use(userRouter);
+  .use(userRouter)
   .use(salesProductsRouter);
 
 app.listen(port);
