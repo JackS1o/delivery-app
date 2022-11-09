@@ -6,6 +6,7 @@ async function getProducts() {
     .catch((err) => err.toJSON());
   return result;
 }
+
 export async function getSales() {
   const result = await axios.get('http://localhost:3001/sales')
     .then(({ data }) => data)
@@ -19,4 +20,12 @@ export async function getSalesById(id) {
     .catch((err) => err.toJSON());
   return result;
 }
+
+export async function getSellerById(id) {
+  const result = await axios.get(`http://localhost:3001/sellerName/${id}`)
+    .then(({ data }) => data)
+    .catch((err) => err.toJSON());
+  return result;
+}
+
 export default getProducts;

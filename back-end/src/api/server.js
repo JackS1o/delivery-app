@@ -6,6 +6,7 @@ const customerRouter = require('../routes/customer');
 const imageRouter = require('../routes/images');
 const sellerRouter = require('../routes/seller');
 const userRouter = require('../routes/user');
+const salesProductsRouter = require('../routes/salesProducts');
 
 app
   .use(registerRouter)
@@ -14,6 +15,7 @@ app
   .use(imageRouter)
   .use(sellerRouter)
   .use(userRouter);
+  .use(salesProductsRouter);
 
 app.listen(port);
 console.log(`Api rodando na porta ${port}`);

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { updatePrice } from '../Card/Card';
 import styles from './index.module.css';
 
@@ -13,16 +12,13 @@ export default function SaleCard({ sale }) {
   };
 
   return (
-    <Link
-      to={ `/seller/orders/${sale.id}` }
-      className={ styles.container }
-    >
+    <>
       <div className={ styles.blockOne }>
         <p>Pedido</p>
         <p
           data-testid={ `seller_orders__element-order-id-${sale.id}` }
         >
-          { sale.id }
+          {sale.id}
         </p>
       </div>
       <div className={ styles.blockTwo }>
@@ -30,28 +26,28 @@ export default function SaleCard({ sale }) {
           <p
             data-testid={ `seller_orders__element-delivery-status-${sale.id}` }
           >
-            { sale.status }
+            {sale.status}
           </p>
           <div>
             <p
               data-testid={ `seller_orders__element-order-date-${sale.id}` }
             >
-              { getDate() }
+              {getDate()}
             </p>
             <p
               data-testid={ `seller_orders__element-card-price-${sale.id}` }
             >
-              { `R$ ${updatePrice(sale.totalPrice)}` }
+              {`R$ ${updatePrice(sale.totalPrice)}`}
             </p>
           </div>
         </div>
         <p
           data-testid={ `seller_orders__element-card-address-${sale.id}` }
         >
-          { `${sale.deliveryAddress}, ${sale.deliveryNumber}` }
+          {`${sale.deliveryAddress}, ${sale.deliveryNumber}`}
         </p>
       </div>
-    </Link>
+    </>
   );
 }
 

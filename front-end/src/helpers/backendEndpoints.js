@@ -6,4 +6,5 @@ export default {
   // a rota adminDelete espera um id no final
   adminDelete: `${BASE_URL}/admin/manage/delete/`,
   sales: `${BASE_URL}/sales`,
+  seller: `${BASE_URL}/seller`,
 };
